@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletConfig;
@@ -27,6 +28,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fitweber.pojo.QuerySqlModel;
 import com.fitweber.service.CommonQueryService;
 import com.fitweber.util.CommonUtils;
+import com.fitweber.util.FileOperateUtil;
 
 /**
  * 
@@ -117,7 +119,7 @@ public class CommonQueryController implements ServletConfigAware {
 			String[] params = elementList.get(i).split("\t");
 			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
 		}
-		String resultMessage = commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath);
+		String resultMessage = commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,"附列资料");
 		PrintWriter out = response.getWriter();
 		out.write(resultMessage);
 		out.close();
@@ -139,7 +141,51 @@ public class CommonQueryController implements ServletConfigAware {
 	}
 	
 	@RequestMapping("/commonQueryByExcel.do")
-	public void commonQueryByExcel(HttpServletRequest request,
+	public String commonQueryByExcel(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/xml; charset=UTF-8");
+		String queryexecelPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/queryexecel/").replace("\\", "/");
+		String sqldownloadPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/sqldownload/").replace("\\", "/");
+        MultipartHttpServletRequest multipartHttpservletRequest=(MultipartHttpServletRequest) request;
+        MultipartFile multipartFile = multipartHttpservletRequest.getFile("execel_param");
+        String originalFileName=multipartFile.getOriginalFilename();
+        File file=new File(queryexecelPath);
+        if(!file.exists()){
+            file.mkdir();
+        }
+        try {
+        	//String queryFilePath  = file+"/queryexecel"+originalFileName.substring(originalFileName.lastIndexOf('.'),originalFileName.length());
+        	String queryFilePath  = file+"/"+originalFileName;
+            FileOutputStream fileOutputStream=new FileOutputStream(queryFilePath);
+            fileOutputStream.write(multipartFile.getBytes());
+            fileOutputStream.flush();
+            fileOutputStream.close();
+            
+    		ArrayList<String> elementList = CommonUtils.readExecel(queryFilePath);
+    		ArrayList<QuerySqlModel> querySqlList = new ArrayList<QuerySqlModel>();
+    		int sqlSize = elementList.size(),i;
+    		for(i=1;i<sqlSize;i++){//屏蔽表头
+    			String[] params = elementList.get(i).split("\t");
+    			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
+    		}
+    		String timeStamp = CommonUtils.formatTime(new Date()).replace(":", "").replace("-", "").replace(" ", "");
+    		String message = commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,originalFileName.substring(0,originalFileName.lastIndexOf('.'))+"_"+timeStamp);
+    		if(!"执行成功".equals(message)){
+    			PrintWriter out = response.getWriter();
+    			out.write("<html>"+message+"</html>");
+    			out.close();
+    		}
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "downloadList";
+	}
+
+	@RequestMapping("/createXMLByExecel.do")
+	public void createXMLByExecel(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml; charset=UTF-8");
@@ -167,7 +213,8 @@ public class CommonQueryController implements ServletConfigAware {
     			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
     		}
     		PrintWriter out = response.getWriter();
-    		out.write("<html>"+commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath)+"</html>");
+    		out.write("<html>"+commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,"325")+"</html>");
+    		out.write("<html>"+commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,"325")+"</html>");
     		out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -176,7 +223,53 @@ public class CommonQueryController implements ServletConfigAware {
         }
         //return "success";
 	}
-
+	
+	@RequestMapping("/createDownloadList.do")
+	public void createDownloadList(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/xml; charset=UTF-8");
+		String path = request.getContextPath();
+		String basePath = request.getScheme() + "://"
+				+ request.getServerName() + ":" + request.getServerPort()
+				+ path + "/commonquery/sqldownload/";
+		String sqldownloadPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/sqldownload/").replace("\\", "/");
+		File file = new File(sqldownloadPath);
+//		if (file.exists()&&file.isDirectory()) {
+//		    String[] tempList = file.list();
+//		    for(String f:tempList){
+//		    	System.out.println(basePath+f);
+//			}
+//		}
+		if (file.exists()&&file.isDirectory()) {
+		    String[] tempList = file.list();
+		    StringBuffer buf = new StringBuffer();
+		    int i,listSize = tempList.length;
+		    buf.append("[");
+		    for(i=1;i<listSize-1;i++){
+		    	buf.append("{\"filename\":\""+tempList[i]+"\"},");
+			}
+		    buf.append("{\"filename\":\""+tempList[listSize-1]+"\"}]");
+		    PrintWriter out = response.getWriter();
+		    out.write(buf.toString());
+		    out.close();
+		}
+	}
+	
+	@RequestMapping("/createDownloadProccess.do")
+	public String createDownloadProccess(HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/xml; charset=UTF-8");
+        String filename = request.getParameter("downloadfilename").toString();
+        String contentType = "application/x-msdownload;";  
+  
+        FileOperateUtil.download(request, response, filename, contentType,  
+        		filename,"commonquery\\sqldownload\\");  
+        return null;
+	}
+	
+	
 	@Override
 	public void setServletConfig(ServletConfig sc) {
 		this.servletConfig = sc;

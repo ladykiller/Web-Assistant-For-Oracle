@@ -68,6 +68,7 @@ public class ZipUtils {
 			BufferedInputStream bis = new BufferedInputStream(
 					new FileInputStream(file));
 			ZipEntry entry = new ZipEntry(basedir + file.getName());
+			out.setEncoding("UTF-8");
 			out.putNextEntry(entry);
 			int count;
 			byte data[] = new byte[BUFFER];

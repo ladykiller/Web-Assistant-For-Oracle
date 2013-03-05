@@ -196,7 +196,7 @@ public class CommonQueryService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList,String downloadPath){
+	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList,String downloadPath,String originalFileName){
 		
 		HashMap<String,String> requestMap = new HashMap<String, String>();
 		ArrayList<String> columns = new ArrayList<String>();
@@ -249,7 +249,7 @@ public class CommonQueryService {
 				}
 				columns.clear();
 			}
-			ZipUtils zipUtils = new ZipUtils(downloadPath+"/sql.zip");
+			ZipUtils zipUtils = new ZipUtils(downloadPath+"/"+originalFileName+".zip");
 			zipUtils.compress(downloadPath+"sources/");
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -7,6 +7,7 @@ import java.io.OutputStream;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
@@ -88,7 +89,22 @@ public class CommonUtils {
 		java.text.Format format = new SimpleDateFormat("yyyy-MM-dd");
 		return format.format(date);
 	}
+	
+	public static String formatDate(Date date) {
+		java.text.Format format = new SimpleDateFormat("yyyy-MM-dd");
+		return format.format(date);
+	}
 
+	public static String formatTime(Timestamp date) {
+		java.text.Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.format(date);
+	}
+	
+	public static String formatTime(Date date) {
+		java.text.Format format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		return format.format(date);
+	}
+	
 	public static void writeExecel(String execelName, int row, int column,
 			String[] content) throws RowsExceededException, WriteException {
 		try {
