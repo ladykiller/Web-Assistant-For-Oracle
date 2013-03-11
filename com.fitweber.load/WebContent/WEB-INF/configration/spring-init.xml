@@ -46,5 +46,12 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<bean id="commonQueryService" class="com.fitweber.service.CommonQueryService">
 		<property name="commonQueryDao" ref="commonQueryDao"></property>
 	</bean>
+	
+	<bean id="scheduleReportTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask" ref="reportTimerTask" />   
+		<property name="period">   
+		<value>86400000<value>   
+		<property>
+	</bean>
 </beans>
 

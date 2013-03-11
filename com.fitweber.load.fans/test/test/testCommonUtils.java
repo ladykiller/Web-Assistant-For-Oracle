@@ -31,10 +31,15 @@ public class testCommonUtils {
 				localtionList.add(new Localtion(i,j));
 			}
 		}
-		ArrayList<String> elementList = CommonUtils.readExecel("test.xls");
+		ArrayList<String> elementList = CommonUtils.readExecel("sourese.xls");
 		for(String e:elementList){
 			System.out.println(e);
 		}
+	}
+	
+	@Test
+	public void testReadExecelSimple(){
+		CommonUtils.readExecelSimple("sourese.xls");
 	}
 	
 	@Test

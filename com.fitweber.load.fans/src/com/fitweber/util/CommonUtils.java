@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.fitweber.pojo.ExecelElement;
 import com.fitweber.pojo.Localtion;
 
@@ -165,6 +167,43 @@ public class CommonUtils {
             e.printStackTrace();
         } 
 		
+		return result;
+	}
+	
+	public static ArrayList<String> readExecelSimple(String execelName){
+		ArrayList<String> result = new ArrayList<String>();
+		try   {
+            Workbook book  =  Workbook.getWorkbook( new  File(execelName));
+             //  获得第一个工作表对象
+            Sheet sheet  =  book.getSheet(0);
+            int rowNum =sheet.getRows(),i,j,rowLen;
+            String temp,pre="",sub="";
+            StringBuffer bf = new StringBuffer();
+            Cell[] row ;
+            for(i=1;i<rowNum;i++){
+            	row = sheet.getRow(i);
+            	if(row[1].getContents()!=null&&!"".equals(row[1].getContents())){
+            		rowLen = row.length;
+            		for(j=0;j<rowLen;j++){
+            			temp = row[j].getContents();
+            			if(temp!=null&&!"".equals(temp)){
+            				if(j==6){
+            					sub = "https://nfsvn.foresee.com.cn/svn/GT3-NF/trunk/engineering"+row[j].getContents();
+            				}
+            				if(j==9){
+            					pre = "svn update -r"+row[j].getContents()+" ";
+            				}
+            			}
+            		}
+            		bf.append(pre+sub+"\n");
+            	}
+            }
+            saveFile(null, "C:\\Users\\Administrator\\Desktop\\updateSvn.bat", bf.toString());
+            System.out.println(bf.toString());
+            book.close();
+        }   catch  (Exception e)  {
+            e.printStackTrace();
+        } 
 		return result;
 	}
 	
