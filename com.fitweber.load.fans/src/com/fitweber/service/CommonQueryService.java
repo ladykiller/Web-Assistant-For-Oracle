@@ -10,6 +10,7 @@ import java.util.regex.*;
 import net.sf.json.JSONObject;
 
 import com.fitweber.dao.CommonQueryDao;
+import com.fitweber.pojo.QuerySqlModel;
 import com.fitweber.util.CommonUtils;
 import com.fitweber.vo.CommonParam;
 import com.fitweber.vo.CommonQueryReq;
@@ -155,6 +156,81 @@ public class CommonQueryService {
 		CommonUtils.saveFile(null, "query.log", resultMessage);
 		return resultMessage;
 	}
+	
+	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList) throws IOException {
+		
+		HashMap<String,String> requestMap = new HashMap<String, String>();
+		ArrayList<String> columns = new ArrayList<String>();
+		StringBuffer backupSql = new StringBuffer();
+		
+		for(QuerySqlModel q :querySqlList){
+			requestMap.put("sql", q.getScriptContent());
+			List<Map> resultList = commonQueryDao.commonQuery(requestMap);
+			if(resultList!=null&&resultList.size()>0){
+				Map map = resultList.get(0);
+				Iterator it = map.keySet().iterator();
+				while(it.hasNext()){
+					String str = (String) it.next();
+					columns.add(str);
+				}
+			}
+			
+			Map map;
+			int i,j,columnSize=columns.size(),resultSize=resultList.size();
+			String sql = q.getScriptContent().toUpperCase();
+			Pattern patternTableName1 = Pattern.compile("FROM (.*?)WHERE");
+			Pattern patternTableName2 = Pattern.compile("FROM (.*?)$");
+			Matcher matcher =patternTableName1.matcher(sql);
+			if(matcher.find()){
+				backupSql.append("INSERT INTO "+matcher.group(1)+" (");
+			}else{
+				matcher =patternTableName2.matcher(sql);
+				if(matcher.find()){
+					backupSql.append("INSERT INTO "+matcher.group(1)+" (");
+				}else{
+					backupSql.append("INSERT INTO  NoTable (");
+				}
+			}
+			for(i=0;i<columnSize;i++){
+				backupSql.append(columns.get(i)+",");
+			}
+			backupSql.append(") VALUES (");
+			String columnsSQL = backupSql.toString().replace(",)", ")");
+			backupSql.setLength(0);
+			String columnType = "";
+			for(i=0;i<resultSize;i++){
+				backupSql.append(columnsSQL);
+				map = (Map)resultList.get(i);
+				for(j=0;j<columnSize;j++){
+					Object o = map.get(columns.get(j));
+					if(o!=null){
+						columnType = o.getClass().toString();
+						if("class java.lang.String".equals(columnType)){
+							backupSql.append("'"+(String) map.get(columns.get(j))+"',");
+						}else if("class java.sql.Timestamp".equals(columnType)){
+							backupSql.append("'"+CommonUtils.formatDate((java.sql.Timestamp) map.get(columns.get(j)))+"',");
+						}
+					}
+				}
+				backupSql.append(");\n");
+			}
+			
+			String backupContent = backupSql.toString().replace(",)", ")");
+			CommonUtils.saveFile(null, q.getScriptFileName()+".sql", backupContent);
+			CommonQueryResp resp = new CommonQueryResp();
+			resp.setTotalNum(resultSize);
+			resp.setResultList(resultList);
+			resp.setColumns(columns);
+			String resultMessage = JSONObject.fromObject(resp).toString();
+			CommonUtils.saveFile(null, "query.log", resultMessage);
+			
+			backupSql.setLength(0);
+			columns.clear();
+		}
+		
+		return "执行成功！";
+	}
+	
 	
 	@SuppressWarnings("rawtypes")
 	public String getAllTableName(){

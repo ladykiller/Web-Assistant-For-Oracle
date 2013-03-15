@@ -2,6 +2,7 @@ package com.fitweber.web;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
@@ -12,7 +13,10 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.fitweber.pojo.ExecelElement;
+import com.fitweber.pojo.QuerySqlModel;
 import com.fitweber.service.CommonQueryService;
+import com.fitweber.util.CommonUtils;
 
 /**
  * 
@@ -83,6 +87,24 @@ public class CommonQueryController {
 		if (!logger.isDebugEnabled()) {
 			logger.debug(resultMessage);
 		}
+		PrintWriter out = response.getWriter();
+		out.write(resultMessage);
+		out.close();
+	}
+	
+	@RequestMapping("/commonQueryByExcel.do")
+	public void commonQueryByExcel(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/xml; charset=UTF-8");
+		ArrayList<String> elementList = CommonUtils.readExecel("test.xls");
+		ArrayList<QuerySqlModel> querySqlList = new ArrayList<QuerySqlModel>();
+		
+		for(String e:elementList){
+			String[] params = e.split("\t");
+			querySqlList.add(new QuerySqlModel(params[0], params[1], params[2]));
+		}
+		String resultMessage = commonQueryService.commonQueryByExcel(querySqlList);
 		PrintWriter out = response.getWriter();
 		out.write(resultMessage);
 		out.close();

@@ -4,15 +4,15 @@
 <mapper namespace="com.fitweber.dao.CommonQueryDao">
 	<select id="getAllTableName" resultType="java.lang.String">
 		<!-- Oracle -->
-		<!-- SELECT TABLE_NAME FROM ALL_TABLES WHERE TABLE_NAME NOT LIKE '%$%' AND TABLESPACE_NAME NOT IN ('SYSTEM','SYSAUX') -->
+		SELECT TABLE_NAME FROM ALL_TABLES WHERE TABLE_NAME NOT LIKE '%$%' AND TABLESPACE_NAME NOT IN ('SYSTEM','SYSAUX')
 		<!-- MySQL -->
-		SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='FITWEBER';
+		<!-- SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='FITWEBER'; -->
 	</select>
 	<select id="getColumns" parameterType="java.lang.String" resultType="java.lang.String">
 		<!-- Oracle -->
-		<!-- SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = #{tableName} ORDER BY COLUMN_ID -->
+		SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = #{tableName} ORDER BY COLUMN_ID
 		<!-- MySQL -->
-		SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='FITWEBER' AND TABLE_NAME = #{tableName};
+		<!-- SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='FITWEBER' AND TABLE_NAME = #{tableName}; -->
 	</select>
 	<select id="commonQuery" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		${sql}

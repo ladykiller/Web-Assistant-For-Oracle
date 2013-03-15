@@ -97,9 +97,8 @@ public class CommonUtils {
 		return true;
 	}
 	
-	public static ArrayList<ExecelElement> readExecel(String execelName,ArrayList<Localtion> localtionList){
-		ArrayList<ExecelElement> result = new ArrayList<ExecelElement>();
-		String content = null;
+	public static ArrayList<String> readExecel(String execelName){
+		ArrayList<String> result = new ArrayList<String>();
         try   {
             Workbook book  =  Workbook.getWorkbook( new  File(execelName));
              //  获得第一个工作表对象
@@ -158,7 +157,7 @@ public class CommonUtils {
                 }
                 
                 System.out.println(bf.toString());
-                
+                result.add(bf.toString());
                 bf.setLength(0);
             }
             book.close();

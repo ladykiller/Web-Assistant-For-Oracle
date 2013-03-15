@@ -31,9 +31,9 @@ public class testCommonUtils {
 				localtionList.add(new Localtion(i,j));
 			}
 		}
-		ArrayList<ExecelElement> elementList = CommonUtils.readExecel("test.xls", localtionList);
-		for(ExecelElement e:elementList){
-			System.out.println(e.getContent());
+		ArrayList<String> elementList = CommonUtils.readExecel("test.xls");
+		for(String e:elementList){
+			System.out.println(e);
 		}
 	}
 	
