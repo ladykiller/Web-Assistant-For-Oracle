@@ -1,0 +1,670 @@
+﻿body {
+	color: #333333;
+	background-color: #D7E9FA;
+	margin: 0px;
+	padding: 0px;
+}
+.body-blue {
+	background-color: #D7E9FA;
+	padding: 8px 4px 0 0;
+	margin: 0;
+}
+.body-white {
+	background-color: #FFF;
+	padding: 0;
+	margin: 0;
+}
+table,td {
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333;
+	line-height: 150%;
+	margin:0;
+	padding:0;
+	}
+A:link {
+	FONT-SIZE: 12px;
+	COLOR: #333;
+	TEXT-DECORATION: none
+}
+A:visited {
+	FONT-SIZE: 12px;
+	COLOR: #333;
+	TEXT-DECORATION: none
+}
+A:hover {
+	FONT-SIZE: 12px;
+	COLOR: #D00;
+	TEXT-DECORATION: underline;
+}
+A.blue12:link {
+	FONT-SIZE: 12px;
+	COLOR: #3076D5;
+	TEXT-DECORATION: underline;
+}
+A.blue12:visited {
+	FONT-SIZE: 12px;
+	COLOR: #3076D5;
+	TEXT-DECORATION: underline;
+}
+A.blue12:hover {
+	FONT-SIZE: 12px;
+	COLOR: #D00;
+	TEXT-DECORATION: none;
+}
+
+A.h12:link {
+	FONT-SIZE: 12px;
+	COLOR: #033282;
+	TEXT-DECORATION: underline;
+}
+A.h12:visited {
+	FONT-SIZE: 12px;
+	COLOR: #033282;
+	TEXT-DECORATION: underline;
+}
+A.h12:hover {
+	FONT-SIZE: 12px;
+	COLOR: #033282;
+	TEXT-DECORATION: underline;
+}
+
+
+
+A.blue12none:link {
+	FONT-SIZE: 12px;
+	COLOR: #3076D5;
+	TEXT-DECORATION: none;
+}
+A.blue12none:visited {
+	FONT-SIZE: 12px;
+	COLOR: #3076D5;
+	TEXT-DECORATION: none;
+}
+A.blue12none:hover {
+	FONT-SIZE: 12px;
+	COLOR: #D00;
+	TEXT-DECORATION: underline;
+}
+A.grey12:link {
+	FONT-SIZE: 12px;
+	COLOR: #666;
+	TEXT-DECORATION: none
+}
+A.grey12:visited {
+	FONT-SIZE: 12px;
+	COLOR: #666;
+	TEXT-DECORATION: none
+}
+A.grey12:hover {
+	FONT-SIZE: 12px;
+	COLOR: #D00;
+	TEXT-DECORATION: underline;
+}
+A.black14:link {
+	FONT-SIZE: 14px;
+	COLOR: #333;
+	TEXT-DECORATION: none
+}
+A.black14:visited {
+	FONT-SIZE: 14px;
+	COLOR: #333;
+	TEXT-DECORATION: none
+}
+A.black14:hover {
+	FONT-SIZE: 14px;
+	COLOR: #F30;
+	TEXT-DECORATION: underline;
+}
+A.red12b:link {
+	FONT-SIZE: 12px;
+	font-weight: bold;
+	COLOR: #F30;
+	TEXT-DECORATION: none
+}
+A.red12b:visited {
+	FONT-SIZE: 12px;
+	font-weight: bold;
+	COLOR: #F30;
+	TEXT-DECORATION: none
+}
+A.red12b:hover {
+	FONT-SIZE: 12px;
+	font-weight: bold;
+	COLOR: #333;
+	TEXT-DECORATION: none;
+}
+
+A.blue12b:link {
+	FONT-SIZE: 12px;
+	font-weight: bold;
+	COLOR: #1F72D0;
+	TEXT-DECORATION: none
+}
+A.blue12b:visited {
+	FONT-SIZE: 12px;
+	font-weight: bold;
+	COLOR: #1F72D0;
+	TEXT-DECORATION: none
+}
+A.blue12b:hover {
+	FONT-SIZE: 12px;
+	font-weight: bold;
+	COLOR: #FF0000;
+	TEXT-DECORATION: none;
+}
+A.red14:link {
+	FONT-SIZE: 14px;
+	COLOR: #F30;
+	TEXT-DECORATION: underline;
+}
+A.red14:visited {
+	FONT-SIZE: 14px;
+	COLOR: #F30;
+	TEXT-DECORATION: underline;
+}
+A.red14:hover {
+	FONT-SIZE: 14px;
+	COLOR: #333;
+	TEXT-DECORATION: underline;
+}
+A.red14b:link {
+	FONT-SIZE: 14px;
+	font-weight: bold;
+	COLOR: #F30;
+	TEXT-DECORATION: none
+}
+A.red14b:visited {
+	FONT-SIZE: 14px;
+	font-weight: bold;
+	COLOR: #F30;
+	TEXT-DECORATION: none
+}
+A.red14b:hover {
+	FONT-SIZE: 14px;
+	font-weight: bold;
+	COLOR: #00C;
+	TEXT-DECORATION: underline;
+}
+.input-txt-read {
+	background-color: #F2F8FE;
+	border: 1px solid #D8E9FB;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333333;
+	line-height: 20px;
+}
+.textarea-txt-read {
+	background-color: #F2F8FE;
+	border: 1px solid #D8E9FB;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333333;
+	line-height: 20px;
+}
+.textarea-txt01{
+	background-color: #F2F8FE;
+	border: 1px solid #D8E9FB;
+	font-family: "宋体";
+	font-size: 12px;
+	color: #333333;
+	height: 18px;
+}
+
+
+
+.left-top {
+	background-image: url(../images-common/left/top_cen.gif);
+	background-repeat: repeat-x;
+}
+.left-top-left {
+	background-image: url(../images-common/left/top_left.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	height: 23px;
+	width: 31px;
+}
+.left-top-right {
+	background-image: url(../images-common/left/top_right.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	width: 12px;
+}
+.left-top-title {
+	line-height: 20px;
+	color:#033280;
+	padding: 3px 0 0 0
+}
+.left-mid {
+	border-top: 1px solid #8BB8F1;
+	border-left: 1px solid #8BB8F1;
+	border-right: 1px solid #8BB8F1;
+	text-align:center;
+	background-color: #FFFFFF;
+	padding: 8px 0 4px 0;
+}
+.left-bot {
+	background-image: url(../images-common/left/bot_cen.gif);
+	background-repeat: repeat-x;
+}
+.left-bot-left {
+	background-image: url(../images-common/left/bot_left.gif);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	height: 10px;
+	width: 22px;
+}
+.left-bot-right {
+	background-image: url(../images-common/left/bot_right.gif);
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	width: 10px;
+}
+.left-menu01 {
+	background-image: url(../images-common/left/bgline01.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	line-height: 26px;
+	font-weight: bold;
+	color: #FFFFFF;
+	padding: 0 0 0 33px;
+	text-align:left;
+	margin-top: 10px;
+}
+.left-menu02 {
+	color: #333;
+	text-align:left;
+	padding:2px 0 0 0;	
+}
+.left-menu02 a {
+	color: #033280;
+	display: block;
+	line-height: 24px;
+	background-image: url(../images-common/left/bgline02.gif);
+	background-repeat: no-repeat;
+	background-position: left bottom;
+	padding: 0 0 0 33px;
+}
+.left-menu02 a:hover {
+	color: #C00;
+	padding: 0 0 0 33px;
+	text-decoration: underline;
+}
+
+
+.button01{	text-align: center;	height:24px; float:none; padding: 2px 0;}
+.button01 ul{	padding:0;	list-style:none;	margin: 0 auto;}
+.button01 li{margin:0 3px;	padding:0;	float: left;	list-style:none;}
+.button01 a {display:block;	color: #000; cursor:hand; text-decoration: none;	font-size: 12px; line-height:24px; text-align: left;}
+.button01 a:hover {	text-decoration: none;}
+/*查询、搜索*/
+.chaxun a {background-position: 0 0; width:72px; height:24px; display:block; background-image: url(../images-common/anniu/chaxun.gif); 
+background-repeat: no-repeat;
+}
+.chaxun a:hover {background-position: 0 -30px; color:#0A246A;}
+.chaxun span{display: block; margin-left: 32px;}
+
+/*保存*/
+.baocun a {background-position: 0 0; width:74px; height:23px; display:block; background-image: url(../images-common/anniu/baocun.gif); background-repeat: no-repeat;}
+.baocun a:hover {background-position: 0 -30px; color:#0A246A;}
+.baocun span{display: block; margin-left: 32px;}
+/*取消、撤销、返回*/
+.quxiao a {background-position: 0 0; width:74px; height:23px; display:block; background-image: url(../images-common/anniu/quxiao.gif); background-repeat: no-repeat;}
+.quxiao a:hover {background-position: 0 -30px; color:#0A246A;}
+.quxiao span{display: block; margin-left: 32px;}
+/*重置*/
+.chongzhi a {background-position: 0 0; width:74px; height:23px; display:block; background-image: url(../images-common/anniu/chongzhi.gif); background-repeat: no-repeat;}
+.chongzhi a:hover {background-position: 0 -30px; color:#0A246A;}
+.chongzhi span{display: block; margin-left: 32px;}
+/*确定 确认*/
+.queding a {background-position: 0 0; width:74px; height:23px; display:block; background-image: url(../images-common/anniu/queding.gif); background-repeat: no-repeat;}
+.queding a:hover {background-position: 0 -30px; color:#0A246A;}
+.queding span{display: block; margin-left: 32px;}
+
+
+
+
+.input-txt01{text-align:right;}
+.input-write {
+	background-color: #FFF;
+	background-image: url(../images-swzj-01/style-content-01/input_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+	padding: 0 2px;
+	height: 20px;
+	line-height:20px;
+	border-left: 1px solid #B5B8C8;
+	border-top: 1px solid #B5B8C8;
+	border-right: 1px solid #E2E2E4;
+	border-bottom: 1px solid #E2E2E4;			
+}
+.input-textarea {
+	background-color: #FFF;
+	background-image: url(../images-swzj-01/style-content-01/input_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+	padding: 0 2px;
+	border-left: 1px solid #B5B8C8;
+	border-top: 1px solid #B5B8C8;
+	border-right: 1px solid #E2E2E4;
+	border-bottom: 1px solid #E2E2E4;			
+}
+.input01-write {
+	padding: 0 2px;
+	height: 20px;	
+	line-height:20px;
+	border: 1px solid #B5B8C8;
+	background-color: #FFF;
+}
+.input01-read {
+	padding: 0 2px;
+	height: 20px;	
+	line-height:20px;
+	border: 1px solid #B5B8C8;
+	background-color: #F2F8FE;
+}
+.input01-btn {
+	padding: 0 6px;
+	height: 22px;
+	line-height:22px;
+	border: 1px solid #B5B8C8;
+	background-color: #FFF;
+	background-image: url(../images-common/anniu/input01-btn.gif);
+	background-repeat: repeat-x;
+	cursor: hand;
+}
+.input01-table {
+	border-top: 1px solid #B5B8C8;
+	border-left: 1px solid #B5B8C8;
+}
+.input01-table th {
+	border-right: 1px solid #B5B8C8;
+	border-bottom: 1px solid #B5B8C8;
+	border-left: 1px solid #FFF;
+	line-height: 20px;
+	height: 20px;
+	background-image: url(../images-common/anniu/input01_th.gif);
+	background-repeat: repeat-x;
+	font-weight: normal;
+}
+.input01-table td {
+	border-right: 1px solid #B5B8C8;
+	border-bottom: 1px solid #B5B8C8;
+	line-height: 20px;
+	height: 20px;
+	padding: 0 3px;
+	background-color: #FFFFFF;
+}
+.input01-arr {
+	border-right: 1px solid #B5B8C8;
+	border-left: 1px solid #B5B8C8;
+	border-bottom: 1px solid #B5B8C8;
+	background-image: url(../images-common/anniu/arr_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	text-align: center;
+	height: 9px;
+}
+.input-readonly {
+	padding: 0 2px;
+	height: 20px;	
+	line-height:20px;
+	border-left: 1px solid #B5B8C8;
+	border-top: 1px solid #B5B8C8;
+	border-right: 1px solid #E2E2E4;
+	border-bottom: 1px solid #E2E2E4;
+	background-color: #F0F0F0;
+}
+.input-page {
+	background-color: #FFF;
+	padding: 0 2px;
+	height: 18px;
+	line-height:18px;
+	border: 1px solid #7F9DB9;		
+}
+
+.button-01 {
+	background-color: #8FBBEB;	
+}
+.button-01-td {
+	background-image: url(../images-swzj-01/style-button-01/bg.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+	padding: 0;
+	border-top: 1px solid #F0F5FA;
+	border-left: 1px solid #F0F5FA;
+	border-right: 1px solid #F0F5FA;		
+}
+.button-01-td a {
+	background-image: url(../images-swzj-01/style-button-01/line.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+	line-height: 24px;
+	padding: 0 8px 0 8px;
+	display: block;
+	float: left;
+	text-decoration: none;
+}
+
+/****/
+.ico-liulan,.ico-yulan,.ico-dryl,.ico-xianshi {
+	background-image: url(../images-common/anniu/ico-liulan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xinjian,.ico-biangeng {
+	background-image: url(../images-common/anniu/ico-xinzeng.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xzxj,.ico-zjxj,.ico-rudang,.ico-lingzheng,.ico-queren,.ico-tongguo{
+	background-image: url(../images-common/anniu/ico-xinzengxiaji.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xzbj,.ico-zjbj{
+	background-image: url(../images-common/anniu/ico-xinzengbenji.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xiugai,.ico-bianji{
+	background-image: url(../images-common/anniu/ico-xiugai-bianji.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shanchu,.ico-zuofei,.ico-zzgzx{
+	background-image: url(../images-common/anniu/ico-shanchu-zuofei.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-dayin,.ico-dazheng,.ico-dytzs,.ico-dygbf,.ico-dylgb{
+	background-image: url(../images-common/anniu/ico-dayin.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xuanqu,.ico-nianshen,.ico-jieshu,.ico-hstg{
+	background-image: url(../images-common/anniu/ico-nianshen-shenhetongguo.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xxlb,.ico-bblb{
+	background-image: url(../images-common/anniu/ico-liebiao.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shuaxin ,.ico-qingkong{
+	background-image: url(../images-common/anniu/ico-shuaxin.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-chuli ,.ico-xuanze,.ico-dakai,.ico-qdgzl{
+	background-image: url(../images-common/anniu/ico-xuanze.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-shuxing{
+	background-image: url(../images-common/anniu/ico-shuxing.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-baobei{
+	background-image: url(../images-common/anniu/ico-baobei.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-gaozhi,.ico-duanxinhu{
+	background-image: url(../images-common/anniu/ico-duanxin.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-chaxun{
+	background-image: url(../images-common/anniu/ico-chaxun.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-jiedian,.ico-huiqian{
+	background-image: url(../images-common/anniu/ico-jiedian-huiqian.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-quxiao,.ico-tuichu,.ico-tiaozheng,.ico-koukuai,.ico-guanbi,.ico-zhanting,.ico-ztcz,.ico-jsgzx{
+	background-image: url(../images-common/anniu/ico-guanbi.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-shezhi,.ico-clsz,.ico-dysz{
+	background-image: url(../images-common/anniu/ico-shezhi.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-baocun ,.ico-lingcun{
+	background-image: url(../images-common/anniu/ico-baocun.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-quanxian{
+	background-image: url(../images-common/anniu/ico-quanxian.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-jieshou,.ico-sbdb{
+	background-image: url(../images-common/anniu/ico-shangbao.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xiada,.ico-xfdb,.ico-jixu,.ico-daoru{
+	background-image: url(../images-common/anniu/ico-xiafa.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-dengji,.ico-shenhe,.ico-fujian,.ico-diaodu,.ico-cxcz{
+	background-image: url(../images-common/anniu/ico-dengji.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-fanhui,.ico-chexiao,.ico-gqlc {
+	background-image: url(../images-common/anniu/ico-fanhui.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-bangzhu {
+	background-image: url(../images-common/anniu/ico-bangzhu.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-jisuan,.ico-jishui,.ico-jiesuan {
+	background-image: url(../images-common/anniu/ico-jisuan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-jiaoyan,.ico-jiancha {
+	background-image: url(../images-common/anniu/ico-jiaoyan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-jiagong {
+	background-image: url(../images-common/anniu/ico-jiagong.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shengcheng,.ico-wpgzx {
+	background-image: url(../images-common/anniu/ico-shengcheng.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-bbsc,.ico-sctzd ,.ico-scdzd {
+	background-image: url(../images-common/anniu/ico-chaxunliebiao.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-cklc,.ico-cxlb {
+	background-image: url(../images-common/anniu/ico-baobiaoshengcheng.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-nzcz{
+	background-image: url(../images-common/anniu/ico-nianzhongcongzhuan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-excel{
+	background-image: url(../images-common/anniu/ico-daochuexcel.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-daochutext{
+	background-image: url(../images-common/anniu/ico-daochutxt.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-daochu {
+	background-image: url(../images-common/anniu/ico-daochu.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shangyibu{
+	background-image: url(../images-common/anniu/ico-page02.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xiayibu,.ico-xiayihu{
+	background-image: url(../images-common/anniu/ico-page03.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xsnscbblb,.ico-xsjcbblb{
+	background-image: url(../images-common/anniu/ico-xsyscbblb.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}.ico-bblldbb{
+	background-image: url(../images-common/anniu/ico-baobiaoliulan1.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-bbll{
+	background-image: url(../images-common/anniu/ico-baobiaoliulan2.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-chongzhi,.ico-shenhe{
+	background-image: url(../images-common/anniu/ico-shenhe.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-gengxin,.ico-shuaxin,.ico-qsgzx{
+	background-image: url(../images-common/anniu/ico-gengxin.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-queding {
+	background-image: url(../images-common/anniu/ico-queding.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shangchuan,.ico-chakan {
+	background-image: url(../images-common/anniu/ico-shangchuan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}.ico-drbc,.ico-zancun,.ico-chongzuo {
+	background-image: url(../images-common/anniu/ico-daorubaocun.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-tijiao {
+	background-image: url(../images-common/anniu/ico-tijiao.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-fubiao {
+	background-image: url(../images-common/anniu/ico-fubiao.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-tianjiahang{
+	background-image: url(../images-common/anniu/ico-tianjiahang.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shanchuhang{
+	background-image: url(../images-common/anniu/ico-shanchuhang.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-guidang{
+	background-image: url(../images-common/anniu/ico-guidang.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-dahui,.ico-tuihui{
+	background-image: url(../images-common/anniu/ico-dahui.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-qztg{
+	background-image: url(../images-common/anniu/ico-qiangzhitongguo.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-daochuXML{
+	background-image: url(../images-common/anniu/ico-daochuxml.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shwtg{
+	background-image: url(../images-common/anniu/ico-shwtg.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-chongzheng{
+	background-image: url(../images-common/anniu/ico-chongzheng.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-pikou{
+	background-image: url(../images-common/anniu/ico-pikou.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-qsfx{
+	background-image: url(../images-common/anniu/ico-qushifenxi.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-qxsc,.ico-qxsh{
+	background-image: url(../images-common/anniu/ico-quxiaoshenhe.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}.ico-scgs{
+	background-image: url(../images-common/anniu/ico-shangchuangeshi.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-sjxf{
+	background-image: url(../images-common/anniu/ico-shujuxiafa.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+
+.ico-sjhs{
+	background-image: url(../images-common/anniu/ico-shujuhuishou.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-blxz,.ico-shangchuan{
+	background-image: url(../images-common/anniu/ico-piliangshangchuan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-fbbb{
+	background-image: url(../images-common/anniu/ico-fabubaobiao.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-fabu,.ico-tsgzx{
+	background-image: url(../images-common/anniu/ico-fabu.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-fasong{
+	background-image: url(../images-common/anniu/ico-fasong.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xywj{
+	background-image: url(../images-common/anniu/ico-jiaoyanwenjian.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-diyitiao,.ico-diyixiang,.ico-shouye{
+	background-image: url(../images-common/anniu/ico-page01.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-zhyt,.ico-zhdyx,.ico-moye{
+	background-image: url(../images-common/anniu/ico-page04.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shouquan{
+	background-image: url(../images-common/anniu/ico-shouquan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-cequan{
+	background-image: url(../images-common/anniu/ico-cequan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-feipei{
+	background-image: url(../images-common/anniu/ico-feipei.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.yuyue td{ border:none}

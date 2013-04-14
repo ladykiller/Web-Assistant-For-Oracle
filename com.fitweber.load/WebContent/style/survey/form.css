@@ -1,0 +1,171 @@
+@charset "utf-8";
+.button01{	text-align: center;	height:24px; float:none; padding: 2px 0;}
+.button01 ul{	padding:0;	list-style:none;	margin: 0 auto;}
+.button01 li{margin:0 3px;	padding:0;	float: left;	list-style:none;}
+.button01 a {display:block;	color: #000; cursor:hand; text-decoration: none;	font-size: 12px; line-height:24px; text-align: left;}
+.button01 a:hover {	text-decoration: none;}
+/*查询*/
+.chaxun a {background-position: 0 0; width:72px; height:24px; display:block; background-image: url(../images-common/anniu/chaxun.gif); 
+background-repeat: no-repeat;
+}
+.chaxun a:hover {background-position: 0 -30px; color:#0A246A;}
+.chaxun span{display: block; margin-left: 32px;}
+
+/*查询、搜索*/
+.baocun a {background-position: 0 0; width:74px; height:23px; display:block; background-image: url(../images-common/anniu/baocun.gif); background-repeat: no-repeat;}
+.baocun a:hover {background-position: 0 -30px; color:#0A246A;}
+.baocun span{display: block; margin-left: 32px;}
+/*查询、搜索*/
+.baocunpz a {background-position: 0 0; width:174px; height:23px; display:block; background-image: url(../images-common/anniu/baocunpz.gif); background-repeat: no-repeat;}
+.baocunpz a:hover {background-position: 0 -30px; color:#0A246A;}
+.baocunpz span{display: block; margin-left: 32px;}
+/*取消、撤销、返回*/
+.quxiao a {background-position: 0 0; width:74px; height:23px; display:block; background-image: url(../images-common/anniu/quxiao.gif); background-repeat: no-repeat;}
+.quxiao a:hover {background-position: 0 -30px; color:#0A246A;}
+.quxiao span{display: block; margin-left: 32px;}
+.baocuntijiao a {background-position: 0 0; width:124px; height:23px; display:block; background-image: url(../images-common/anniu/baocun.gif); background-repeat: no-repeat;}
+.baocuntijiao a:hover {background-position: 0 -30px; color:#0A246A;}
+.baocuntijiao span{display: block; margin-left: 32px;}
+
+
+
+
+.input-txt01{text-align:right;}
+.input-write {
+	background-color: #FFF;
+	background-image: url(../images-swzj-01/style-content-01/input_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+	padding: 0 2px;
+	height: 20px;
+	line-height:20px;
+	border-left: 1px solid #B5B8C8;
+	border-top: 1px solid #B5B8C8;
+	border-right: 1px solid #E2E2E4;
+	border-bottom: 1px solid #E2E2E4;			
+}
+.input01-write {
+	padding: 0 2px;
+	height: 20px;	
+	line-height:20px;
+	border: 1px solid #B5B8C8;
+	background-color: #FFF;
+}
+.input01-read {
+	padding: 0 2px;
+	height: 20px;	
+	line-height:20px;
+	border: 1px solid #B5B8C8;
+	background-color: #F2F8FE;
+}
+.input01-btn {
+	padding: 0 6px;
+	height: 22px;
+	line-height:22px;
+	border: 1px solid #B5B8C8;
+	background-color: #FFF;
+	background-image: url(../images-common/anniu/input01-btn.gif);
+	background-repeat: repeat-x;
+	cursor: hand;
+}
+.input01-table {
+	border-top: 1px solid #B5B8C8;
+	border-left: 1px solid #B5B8C8;
+}
+.input01-table th {
+	border-right: 1px solid #B5B8C8;
+	border-bottom: 1px solid #B5B8C8;
+	border-left: 1px solid #FFF;
+	line-height: 20px;
+	height: 20px;
+	background-image: url(../images-common/anniu/input01_th.gif);
+	background-repeat: repeat-x;
+	font-weight: normal;
+}
+.input01-table td {
+	border-right: 1px solid #B5B8C8;
+	border-bottom: 1px solid #B5B8C8;
+	line-height: 20px;
+	height: 20px;
+	padding: 0 3px;
+	background-color: #FFFFFF;
+}
+.input01-arr {
+	border-right: 1px solid #B5B8C8;
+	border-left: 1px solid #B5B8C8;
+	border-bottom: 1px solid #B5B8C8;
+	background-image: url(../images-common/anniu/arr_bg.gif);
+	background-repeat: repeat-x;
+	background-position: left bottom;
+	text-align: center;
+	height: 9px;
+}
+.input-readonly {
+	padding: 0 2px;
+	height: 20px;	
+	line-height:20px;
+	border-left: 1px solid #B5B8C8;
+	border-top: 1px solid #B5B8C8;
+	border-right: 1px solid #E2E2E4;
+	border-bottom: 1px solid #E2E2E4;
+	background-color: #F0F0F0;
+}
+.input-page {
+	background-color: #FFF;
+	padding: 0 2px;
+	height: 18px;
+	line-height:18px;
+	border: 1px solid #7F9DB9;		
+}
+
+
+
+
+
+
+
+
+
+.button-01 {
+	background-color: #8FBBEB;	
+}
+.button-01-td {
+	background-image: url(../images-swzj-01/style-button-01/bg.gif);
+	background-repeat: repeat-x;
+	background-position: left top;
+	padding: 0;
+	border-top: 1px solid #F0F5FA;
+	border-left: 1px solid #F0F5FA;
+	border-right: 1px solid #F0F5FA;		
+}
+.button-01-td a {
+	background-image: url(../images-swzj-01/style-button-01/line.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+	line-height: 24px;
+	padding: 0 8px 0 8px;
+	display: block;
+	float: left;
+	text-decoration: none;
+}
+.ico-xinzeng {
+	background-image: url(../images-common/anniu/ico-xinzeng.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xinzeng2 {
+	background-image: url(../images-common/anniu/ico-xinzeng.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 32px;	padding: 0 0 0 20px;
+}
+.ico-liulan {
+	background-image: url(../images-common/anniu/ico-liulan.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-xiugai {
+	background-image: url(../images-common/anniu/ico-xiugai-bianji.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shanchu {
+	background-image: url(../images-common/anniu/ico-shanchu-zuofei.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-dayin {
+	background-image: url(../images-common/anniu/ico-dayin.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}
+.ico-shuaxin {
+	background-image: url(../images-common/anniu/ico-shuaxin.gif);	background-repeat: no-repeat;	background-position: left center;	line-height: 24px;	padding: 0 0 0 20px;	display: block;	float: left;
+}

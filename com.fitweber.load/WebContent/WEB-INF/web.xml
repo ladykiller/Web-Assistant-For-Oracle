@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>com.fitweber.load</display-name>
+  <welcome-file-list>
+    <welcome-file>contextList.html</welcome-file>
+  </welcome-file-list>
+  <!-- spring 加载log4j配置文件，可选配置 -->
+	<context-param>
+		<param-name>log4jConfigLoaction</param-name>
+		<param-value>/WEB-INF/classes/log4j.properties</param-value>
+	</context-param>
+	
+	<!-- 刷新Log4j配置文件的间隔,60秒，可选配置 -->
+	<context-param>
+		<param-name>log4jRefreshInterval</param-name>
+		<param-value>60000</param-value>
+	</context-param>
+	
+	<!-- 可选配置，定义web 应用的别名,如果不设置，缺省为"webapp.root"，当tomcat加载多个项目时，会发生名称冲突 
+	<context-param>
+		<param-name>webAppRootKey</param-name>
+		<param-value>webName.root</param-value>
+	</context-param>
+	-->
+	<!-- 声明配置文件 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>WEB-INF/configration/spring-init.xml</param-value>
+	</context-param>
+	
+	<!-- spring mvc 配置-->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- spring 配置文件，名称的路径都可以配置，如果不配置此项则自动扫描/WEB-INF/ springmvc-servlet.xml，此文件名规则为servlet名-servlet.xml -->
+		<init-param>
+			<param-name>namespace</param-name>
+			<param-value>configration/spring-servlet</param-value>
+			<!-- 加载多个配置文件 
+			<param-name>contextConfigLocation</param-name> 
+			<param-value>
+				/WEB-INF/conf/applicationContext_*.xml, 
+				/WEB-INF/conf/user-servlet.xml 
+			</param-value>
+			-->
+		</init-param>
+		<!--servlet加载方式,启动容器时加载 -->
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+
+	<!-- Spring 加载 Log4j 的监听器，可选配置 -->
+	<listener>
+		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+	</listener> 
+
+	<!-- Spring 加载 ContextLoader 的监听器，可选配置 -->	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 防止内存泄漏，可选配置 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+</web-app>

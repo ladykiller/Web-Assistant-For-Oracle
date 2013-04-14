@@ -4,3 +4,12 @@
 *.jar
 *.war
 *.ear
+*.bak
+*.sql
+
+.metadata
+Servers
+bin
+build
+com.support
+.svn

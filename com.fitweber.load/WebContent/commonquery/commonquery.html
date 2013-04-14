@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>通用查询</title>
+<style type="text/css">
+<!--
+.STYLE1 {color: #EBF0F9}
+table.out{
+	border-style:solid;
+	border-width:thin;
+	border-collapse: collapse;
+	background-color: #EBF0F9;
+}
+table.in{
+	border-collapse: collapse;
+	background-color: #D3E2EE;
+}
+td{
+text-align:center;
+}
+td.search{
+	text-align:left;
+}
+textarea {
+width:99%;
+height:21px;
+}
+
+textarea.search{
+width:800px;
+height:80px;
+}
+-->
+</style>
+  <script type="text/javascript" language="javascript" src="../script/json/json2.js" ></script>
+  <script type="text/javascript" language="javascript" src="../script/jquery/20121128/jquery.js" ></script>
+  <script type="text/javascript" language="javascript" src="../script/jquery/jquery-autocomplete/jquery.autocomplete.min.js" ></script>
+  <script type="text/javascript" language="javascript" src="../script/jquery/jquery-autocomplete/jquery.autocomplete.pack.js" ></script>
+  <script type="text/javascript" language="javascript" src="../script/My97DatePicker/WdatePicker.js"></script>
+  <script type="text/javascript" language="javascript" src="../script/query/commonquery.js"></script>
+  <link rel="stylesheet" type="text/css" href="../script/jquery/jquery-autocomplete/jquery.autocomplete.css" />
+  <link rel="stylesheet" type="text/css" href="../script/jquery/jquery-autocomplete/lib/thickbox.css" />
+</head>
+<body>
+<div >
+<form action="">
+
+<table>
+	<tr><td colspan="4"  class="search">&nbsp;</td></tr>
+	<tr>
+		<td colspan="4"  class="search">
+			<table>
+				<tr>
+					<td colspan="2" class="search">&nbsp;&nbsp;&nbsp;&nbsp;数据库URL:&nbsp;<input id='connectPort' type="text" size="55"/></td>
+				</tr>
+				<tr>
+					<td class="search">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;用户名:&nbsp;<input id='userName' type="text"/></td>
+					<td class="search">&nbsp;&nbsp;&nbsp;&nbsp;密码:&nbsp;<input id='passWord' type="text"/></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="4"  class="search">
+			<table>
+				<tr>
+					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表名称:&nbsp;<input id='tableName' name='tableName' type="text"/></td>
+					<td><p>
+			    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='req_rework' name='param_rework'><span>重置</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='param_search' name='param_search'><span>查询</span></a></p></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr id='paramModel' style='display:none'>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;参数名称:&nbsp;<input id='paramName' type="text"/></td>
+		<td>参数值:&nbsp;<input id='paramValue' type="text"/></td>
+		<td>逻辑关系:&nbsp;<select id='paramLogic'>
+			<option value="AND">AND</option>
+			<option value="OR">OR</option>
+			<option value="LIKE">LIKE</option>
+			<option value="IN">IN</option>
+			<option value="NOT IN">NOT IN</option>
+		</select></td>
+  		<td width="80">
+			<div style='display:none'>
+				<input type='button' value='增加' onclick='addParam(this);' />
+				<input type='button' value='删除' onclick='delParam(this);' />
+			</div>
+		</td>
+	</tr>
+</table>
+
+<table>
+	<tr>
+		<td colspan="4"  class="search">
+			<table>
+				<tr>
+					<td class="search">SQL语句搜素:&nbsp;&nbsp;&nbsp;<a href="#none" id='sql_rework' name='sql_rework'><span>重置</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='sql_search' name='sql_search'><span>查询</span></a></td>
+				</tr>
+				<tr>
+					<td >
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<textarea class="search" id="sql_statment" name="sql_statment"></textarea>
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<p>&nbsp;</p>
+</form>
+</div>
+<div >
+<form method="post" id="workdailyForm" name="workdailyForm">
+ 	<input type="hidden" name="reportId" id="reportId"/>
+  <table align="center" width="100%" border="1" cellpadding="0" cellspacing="0" class="out">
+    <tr>
+      <!-- <td width="100" align="center" valign="middle" bgcolor="#D3E2EE" ><p >报文转换</p></td> -->
+      <td bordercolor="#EBF0F9" bgcolor="#EBF0F9" ><table width="100%" border="1" cellpadding="0" cellspacing="0" class="in" >
+        <tr>
+          <td>
+		  <table id="commonResult"  width="100%" align="center" border="1" cellpadding="0" cellspacing="0" class="in">
+		  	<tr id='tableHead'></tr>
+		  </table>
+		  </td>
+        </tr>
+      </table>
+      </td>
+    </tr>
+    <tr>
+    	<td colspan="2" align="center"><p>
+    	<a href="#none" id='prePage' name='prePage'><span>上一页</span></a>&nbsp;&nbsp;共<input id='totalNum' type="text" readonly="readonly" style="width:20px;" />页,当前第<input id='pageNum' type="text" readonly="readonly" style="width:20px;"/>页&nbsp;&nbsp;<a href="#none" id='nextPage' name='nextPage'><span>下一页</span></a>&nbsp;&nbsp;&nbsp;&nbsp;跳转到<input id='jumpPageNum' name='jumpPageNum' type="text" style="width:20px;"/>页&nbsp;&nbsp;<a href="#none" id='jumpPage' name='jumpPage'><span>跳转</span></a></p></td>
+    </tr>
+  </table>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,98 @@
+	body{
+		background-image:url(../image/001.jpg);
+		font-family:verdana,Arial,Helvetica
+	}
+	ul{
+		position: relative;
+		list-style-position:outside;
+		font-size:20px;
+		left: 30px;
+		top: 20px;
+	}
+
+	ul.square {list-style-type: square;}   
+	ul.circle {list-style-type: circle;}   
+	ul.disc {list-style-type: disc;}     
+	ul.none {list-style-type: none;}
+
+	ol{
+		position: relative;
+		list-style-position:outside;
+		font-size:20px;
+		left: 160px;
+		top: -610px;
+	}
+
+	ol.decimal {list-style-type: decimal}
+	ol.lroman {list-style-type: lower-roman}
+	ol.uroman {list-style-type: upper-roman}
+	ol.lalpha {list-style-type: lower-alpha}
+	ol.ualpha {list-style-type: upper-alpha}
+
+
+	#partOne{
+		width:400px;
+		height:240px;
+		background-color:#F3F0F1;
+		text-indent: 24px;
+		text-transform: uppercase
+	}
+
+	#partTwo{
+		width:320px;
+		height:auto;
+		text-indent: 24px;
+		background-color:#C2E3E9;
+		text-decoration:line-through;
+		white-space: normal
+	}
+
+	#partThree{
+		width:320px;
+		height:800px;
+		background-color:#C2E3E9;
+		float: right;
+	}
+	table.one{
+		table-layout:auto;
+		left:0px;
+		width:800px;
+		background-color:#D8C9E0;
+		border-collapse: separate;
+		caption-side:bottom;
+		empty-cells:hide;
+		border-spacing:10px 12px;
+		outline:#00FF00 double medium;
+	}
+
+	h2{
+		font-style: italic;
+		font-weight: normal;
+		font-size:36px;
+		color:#f60;
+		background-color: #00569D;
+		text-indent: 20px;
+		padding-left: 20px;
+		word-spacing: 30px;
+	}
+	.sample_table{
+		position: absolute;
+		left: 35%;
+		top: 10%;
+		border:0; 
+		color:black;
+		background-color: #00569D;
+		width:auto;
+		height:auto;
+		padding:0px;
+		margin:0px
+	}
+	.rightbanner{
+		position: absolute;
+		top:5%;
+		right:5%;
+		background-color: #83CEF1;
+		border: 1px dotted #390302;
+		padding: 2px;
+		text-align: center
+	}

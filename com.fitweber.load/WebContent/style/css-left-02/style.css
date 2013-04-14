@@ -1,0 +1,25 @@
+﻿.left-02-top {
+	background-image: url(../images-left-02/top_bg.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+	padding: 0px;
+	height: 23px;
+}
+.left-02-title {
+	font-weight: bold;
+	color: #033280;
+	background-image: url(../images-left-02/top_right.gif);
+	background-repeat: no-repeat;
+	background-position: right top;
+	padding: 0 0 0 10px;
+	height: 23px;
+	line-height: 23px;
+}
+.left-02-mid {
+	border-left: 1px solid #8FBBEB;
+	border-right: 1px solid #8FBBEB;
+	border-bottom: 1px solid #8FBBEB;
+	background-color: #FFFFFF;
+	height: 414px;
+	vertical-align: top;
+}

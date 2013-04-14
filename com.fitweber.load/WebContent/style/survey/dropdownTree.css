@@ -1,0 +1,32 @@
+.dropDownTree {
+	width: 200px; 
+	padding:0px;
+	margin:0px;
+	border: #8ba8c6 0px solid;
+	height: 24px;
+}
+
+.showSelectedNode { 
+	border: #8ba8c6 1px solid;
+	font-size: 12px;
+	width:200px;
+	/*background-color:#F0F0F0;*/
+	height: 20px;
+	padding-left:2px;
+	/*background-image: url("../images/leaf.png");*/
+	background-repeat: no-repeat;
+	background-position: right center;
+	cursor: pointer;
+	
+}
+.showTree {
+	display: none;
+	border: #CCCCCC 1px solid;
+	width:auto;
+	height: auto;
+	position: absolute;
+	background-color: #FFFFFF;
+	font-size: 13px;
+	overflow: auto;
+	height: 20px;	
+} 
