@@ -151,12 +151,17 @@ function commonQueryByParam(pageNum,pageSize){
 		jQuery('#tableHead').children().remove();
 		jQuery('#tableHead').append(content);
 		content='';
-		var i,j,resultSize=resultList.length,columnSize=columns.length;
+		var i,j,columnVal,dateVal,resultSize=resultList.length,columnSize=columns.length;
 		for(i=0;i<resultSize;i++){
 			temp = resultList[i];
 			content=content+'<tr id="result_'+i+'">';
 			for(j=0;j<columnSize;j++){
-				content=content+'<td>'+jQuery(temp).attr(columns[j])+'</td>';
+				columnVal=jQuery(temp).attr(columns[j]);
+				if(columnVal.time!==undefined){
+					dateVal = new Date(columnVal.time);
+					columnVal = dateVal.getFullYear()+'-'+(dateVal.getMonth()+1)+'-'+dateVal.getDate();
+				}
+				content=content+'<td>'+columnVal+'</td>';
 			}
 			content=content+'</tr>';
 		}
@@ -190,7 +195,7 @@ function commonQueryBySQL(pageNum,pageSize){
 		jQuery('#tableHead').children().remove();
 		jQuery('#tableHead').append(content);
 		content='';
-		var i,j,resultSize=resultList.length,columnSize=columns.length;
+		var i,j,columnVal,dateVal,resultSize=resultList.length,columnSize=columns.length;
 		for(i=0;i<resultSize;i++){
 			temp = resultList[i];
 			content=content+'<tr>';
