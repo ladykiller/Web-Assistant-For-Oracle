@@ -3,10 +3,16 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fitweber.dao.CommonQueryDao">
 	<select id="getAllTableName" resultType="java.lang.String">
-		SELECT TABLE_NAME FROM ALL_TABLES WHERE TABLE_NAME NOT LIKE '%$%' AND TABLESPACE_NAME NOT IN ('SYSTEM','SYSAUX')
+		<!-- Oracle -->
+		<!-- SELECT TABLE_NAME FROM ALL_TABLES WHERE TABLE_NAME NOT LIKE '%$%' AND TABLESPACE_NAME NOT IN ('SYSTEM','SYSAUX') -->
+		<!-- MySQL -->
+		SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA='FITWEBER';
 	</select>
 	<select id="getColumns" parameterType="java.lang.String" resultType="java.lang.String">
-		SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = #{tableName} ORDER BY COLUMN_ID
+		<!-- Oracle -->
+		<!-- SELECT COLUMN_NAME FROM ALL_TAB_COLUMNS WHERE TABLE_NAME = #{tableName} ORDER BY COLUMN_ID -->
+		<!-- MySQL -->
+		SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_SCHEMA='FITWEBER' AND TABLE_NAME = #{tableName};
 	</select>
 	<select id="commonQuery" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		${sql}

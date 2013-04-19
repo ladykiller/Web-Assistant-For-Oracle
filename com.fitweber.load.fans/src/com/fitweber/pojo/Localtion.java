@@ -16,6 +16,22 @@ public class Localtion implements Serializable {
 	private int x;
 	private int y;
 	private int z;
+	
+	public Localtion(){
+		
+	}
+	
+	public Localtion(int x,int y,int z){
+		this.x=x;
+		this.y=y;
+		this.z=z;
+	}
+	
+	public Localtion(int x,int y){
+		this.x=x;
+		this.y=y;
+	}
+	
 	/**
 	 * @return the x
 	 */
