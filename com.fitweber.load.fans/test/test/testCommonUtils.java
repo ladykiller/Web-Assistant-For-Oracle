@@ -1,5 +1,6 @@
 package test;
 import java.util.ArrayList;
+import java.util.Random;
 
 import org.junit.Test;
 
@@ -30,9 +31,25 @@ public class testCommonUtils {
 				localtionList.add(new Localtion(i,j));
 			}
 		}
-		ArrayList<ExecelElement> elementList = CommonUtils.readExecel("E:/Dev-Cpp/test.xls", localtionList);
+		ArrayList<ExecelElement> elementList = CommonUtils.readExecel("test.xls", localtionList);
 		for(ExecelElement e:elementList){
 			System.out.println(e.getContent());
+		}
+	}
+	
+	@Test
+	public void testQuickSort(){
+		int[] arr = new int[100];
+		Random r = new Random();
+		int i;
+		for(i=0;i<100;i++){
+			arr[i]=r.nextInt();
+		}
+		
+		arr=CommonUtils.quickSort(arr, 0, 99);
+		
+		for(i=0;i<100;i++){
+			System.out.println(arr[i]);
 		}
 	}
 }
