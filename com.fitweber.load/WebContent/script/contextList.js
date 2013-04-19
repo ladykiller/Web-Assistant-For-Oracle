@@ -7,6 +7,8 @@ jQuery(document).ready(function(){
 		$('#childFrame').attr('src','workdaily/workdaily.html');
 	});
 	$('#surveyManagement').click(function(){
-		$('#childFrame').attr('src','workdaily/bwzhmanage.html');
+		$('#childFrame').attr('src','commonquery/commonquery.html');
 	});
 });
+
+

@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.apache.ivyde.eclipse.cpcontainer.IVYDE_CONTAINER/?project=com.fitweber.load.fans&amp;ivyXmlPath=ivy.xml&amp;confs=*"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/jxl"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -6,6 +6,9 @@
         <dependent-module archiveName="com.fitweber.load.fans.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/com.fitweber.load.fans/com.fitweber.load.fans">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="jxl.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/jxl/jxl">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="/com.fitweber.load/build/classes"/>
         <property name="context-root" value="extend"/>
     </wb-module>

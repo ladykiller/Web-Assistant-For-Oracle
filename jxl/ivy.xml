@@ -1,0 +1,10 @@
+<ivy-module version="1.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"            
+            xsi:noNamespaceSchemaLocation="http://ant.apache.org/ivy/schemas/ivy.xsd">
+    <info organisation="jxl" module="jxl"/>
+    
+	<dependencies>		
+		<dependency org="org.apache" name="log4j" rev="1.2.16"/>
+	</dependencies>
+        
+</ivy-module>
