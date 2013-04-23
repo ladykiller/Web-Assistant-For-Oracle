@@ -6,12 +6,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import net.sf.json.JSONObject;
 
 import com.fitweber.dao.CommonQueryDao;
 import com.fitweber.pojo.QuerySqlModel;
 import com.fitweber.util.CommonUtils;
+import com.fitweber.util.ZipUtils;
 import com.fitweber.vo.CommonParam;
 import com.fitweber.vo.CommonQueryReq;
 import com.fitweber.vo.CommonQueryResp;
@@ -157,7 +160,7 @@ public class CommonQueryService {
 		return resultMessage;
 	}
 	
-	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList) throws IOException {
+	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList,String downloadPath) throws IOException {
 		
 		HashMap<String,String> requestMap = new HashMap<String, String>();
 		ArrayList<String> columns = new ArrayList<String>();
@@ -216,19 +219,45 @@ public class CommonQueryService {
 			}
 			
 			String backupContent = backupSql.toString().replace(",)", ")");
-			CommonUtils.saveFile(null, q.getScriptFileName()+".sql", backupContent);
+			CommonUtils.saveFile(null, downloadPath+"sources/"+q.getScriptFileName()+".sql", backupContent);
 			CommonQueryResp resp = new CommonQueryResp();
 			resp.setTotalNum(resultSize);
 			resp.setResultList(resultList);
 			resp.setColumns(columns);
 			String resultMessage = JSONObject.fromObject(resp).toString();
-			CommonUtils.saveFile(null, "query.log", resultMessage);
+			CommonUtils.saveFile(null, downloadPath+"query.log", resultMessage);
 			
 			backupSql.setLength(0);
 			columns.clear();
 		}
 		
+		ZipUtils zipUtils = new ZipUtils(downloadPath+"/sql.zip");
+		zipUtils.compress(downloadPath+"sources/");
+		
 		return "执行成功！";
+	}
+	
+	public String createFLZL(String[] sqls){
+		HashMap<String,String> requestMap = new HashMap<String, String>();
+		StringBuffer bf = new StringBuffer();
+		int listLen;
+		for(String s:sqls){
+			requestMap.put("sql", s);
+			List<Map> resultList = commonQueryDao.commonQuery(requestMap);
+			listLen=resultList.size();
+			if(listLen>0){
+				bf.append((String)resultList.get(0).get("FBZL_DM"));
+/*				for(Map m:resultList){
+				}*/
+			}
+			bf.append("    \n");
+		}
+		System.out.println(bf.toString());
+		return bf.toString();
+	}
+	
+	public String uploadFile(){
+		return "succeese";
 	}
 	
 	

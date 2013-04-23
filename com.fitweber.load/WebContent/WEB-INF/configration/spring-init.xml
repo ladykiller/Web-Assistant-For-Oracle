@@ -46,12 +46,25 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<bean id="commonQueryService" class="com.fitweber.service.CommonQueryService">
 		<property name="commonQueryDao" ref="commonQueryDao"></property>
 	</bean>
-	
-	<bean id="scheduleReportTask" class="org.springframework.scheduling.timer.ScheduledTimerTask">
-		<property name="timerTask" ref="reportTimerTask" />   
-		<property name="period">   
-		<value>86400000<value>   
-		<property>
+
+	<bean id="timer" class="org.springframework.scheduling.timer.TimerFactoryBean">
+		<property name="scheduledTimerTasks">
+			<list>
+				<ref local="MyTimeTask1" />
+			</list>
+		</property>
+	</bean>
+	<bean id="MyTimeTask" class="com.fitweber.timer.testTimer" />
+	<bean id="MyTimeTask1" class="org.springframework.scheduling.timer.ScheduledTimerTask">
+		<property name="timerTask">
+			<ref bean="MyTimeTask" />
+		</property>
+		<property name="delay">
+			<value>1000</value>
+		</property>
+		<property name="period">
+			<value>3600000</value>
+		</property>
 	</bean>
 </beans>
 

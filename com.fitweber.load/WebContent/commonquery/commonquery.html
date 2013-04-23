@@ -107,18 +107,21 @@ height:80px;
 		</td>
 	</tr>
 </table>
+<p>&nbsp;</p>
 
-<table>
-	<tr>
-		<td colspan="4"  class="search">
-			<table>
-				<tr>
-					<td class="search">Execel配置文件:&nbsp;&nbsp;&nbsp;&nbsp;<input type="file" size="50" /></td><td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='execel_search' name='execel_search'><span>查询</span></a></td>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+<form action="/extend/commonQuery/commonQueryByExcel.do" method="post" enctype="multipart/form-data">
+	<table>
+		<tr>
+			<td colspan="4"  class="search">
+				<table>
+					<tr>
+						<td class="search">Execel配置文件:&nbsp;&nbsp;&nbsp;&nbsp;<input id="execel_param" name="execel_param" type="file" size="50" /></td><td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='execel_search' name='execel_search'><span>查询</span></a></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</form>
 
 <p>&nbsp;</p>
 </form>

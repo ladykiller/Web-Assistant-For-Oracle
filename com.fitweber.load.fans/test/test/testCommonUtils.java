@@ -31,7 +31,7 @@ public class testCommonUtils {
 				localtionList.add(new Localtion(i,j));
 			}
 		}
-		ArrayList<String> elementList = CommonUtils.readExecel("sourese.xls");
+		ArrayList<String> elementList = CommonUtils.readExecel("test.xls");
 		for(String e:elementList){
 			System.out.println(e);
 		}
@@ -40,6 +40,16 @@ public class testCommonUtils {
 	@Test
 	public void testReadExecelSimple(){
 		CommonUtils.readExecelSimple("sourese.xls");
+	}
+	
+	@Test
+	public void testCreateFlzl(){
+		CommonUtils.createFlzl("flzl.xls");
+	}
+	
+	@Test
+	public void testCreatFlzlSql(){
+		CommonUtils.creatFlzlSql("flzl_sql.xls");
 	}
 	
 	@Test

@@ -9,11 +9,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.fitweber.pojo.ExecelElement;
 import com.fitweber.pojo.QuerySqlModel;
 import com.fitweber.service.CommonQueryService;
 import com.fitweber.util.CommonUtils;
@@ -97,16 +99,34 @@ public class CommonQueryController {
 			HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml; charset=UTF-8");
-		ArrayList<String> elementList = CommonUtils.readExecel("test.xls");
+		String queryexecelPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/queryexecel/test.xls").replace("\\", "/");
+		String sqldownloadPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/sqldownload/").replace("\\", "/");
+		ArrayList<String> elementList = CommonUtils.readExecel(queryexecelPath);
 		ArrayList<QuerySqlModel> querySqlList = new ArrayList<QuerySqlModel>();
-		
-		for(String e:elementList){
-			String[] params = e.split("\t");
-			querySqlList.add(new QuerySqlModel(params[0], params[1], params[2]));
+		int sqlSize = elementList.size(),i;
+		for(i=1;i<sqlSize;i++){//屏蔽表头
+			String[] params = elementList.get(i).split("\t");
+			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
 		}
-		String resultMessage = commonQueryService.commonQueryByExcel(querySqlList);
+		String resultMessage = commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath);
 		PrintWriter out = response.getWriter();
 		out.write(resultMessage);
 		out.close();
 	}
+	
+	@RequestMapping("/createFLZL.do")
+	public void createFLZL(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException, RowsExceededException, WriteException {
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/xml; charset=UTF-8");
+		//String queryexecelPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/queryexecel/test.xls").replace("\\", "/");
+		String[] elementList = CommonUtils.createFlzl("flzl.xls");
+		String resultMessage = commonQueryService.createFLZL(elementList);
+		
+		CommonUtils.writeExecel("flzl_1.xls",0,3,resultMessage.split("\n"));
+		PrintWriter out = response.getWriter();
+		out.write(resultMessage);
+		out.close();
+	}
+	
 }
