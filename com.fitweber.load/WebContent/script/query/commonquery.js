@@ -99,6 +99,10 @@ jQuery(document).ready(function(){
 		commonQueryBySQL(pageNum,pageSize);
 	});
 	
+	jQuery('#execel_search').click(function(){
+		jQuery('#uploadExecel').submit();
+	});
+	
 	jQuery('#tableName').blur(function(){
 		jQuery('input[id*="paramName_"]').unautocomplete();
 		var tableName = jQuery('#tableName').val();
