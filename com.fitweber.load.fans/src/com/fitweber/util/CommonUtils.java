@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.UUID;
 
-import org.apache.catalina.tribes.util.UUIDGenerator;
-
 import jxl.Cell;
 import jxl.Range;
 import jxl.Sheet;
