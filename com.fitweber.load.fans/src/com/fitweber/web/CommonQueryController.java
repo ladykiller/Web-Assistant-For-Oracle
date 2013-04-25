@@ -165,13 +165,15 @@ public class CommonQueryController implements ServletConfigAware {
     			String[] params = elementList.get(i).split("\t");
     			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
     		}
-    		String resultMessage = commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath);
-            
+    		PrintWriter out = response.getWriter();
+    		out.write("<html>"+commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath)+"</html>");
+    		out.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //return "success";
 	}
 
 	@Override

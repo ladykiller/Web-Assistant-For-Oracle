@@ -11,6 +11,7 @@ import java.util.List;
 public interface CommonQueryDao {
 	@SuppressWarnings("rawtypes")
 	public List commonQuery(HashMap<String,String> requestMap);
+	public int commonQueryCount(HashMap<String,String> requestMap);
 	@SuppressWarnings("rawtypes")
 	public List getAllTableName();
 	@SuppressWarnings("rawtypes")

@@ -1,5 +1,6 @@
 package com.fitweber.service;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class CommonQueryService {
 		JSONObject jsonObject =JSONObject.fromObject(requestData);
 		CommonQueryReq commonQueryReq = (CommonQueryReq) JSONObject.toBean(jsonObject,CommonQueryReq.class,classMap);
 		
+		
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT * FROM ");
 		sql.append(commonQueryReq.getTableName());
@@ -42,6 +44,8 @@ public class CommonQueryService {
 			sql.append(cp.getParamName()+" = ");
 			sql.append("'"+cp.getParamValue()+"' ");
 		}
+		requestMap.put("BEIGNROW",String.valueOf((commonQueryReq.getPageNum()-1)*commonQueryReq.getPageSize()));
+		requestMap.put("ENDROW",String.valueOf(commonQueryReq.getPageNum()*commonQueryReq.getPageSize()));
 		requestMap.put("sql", sql.toString());
 		ArrayList<String> columns = new ArrayList<String>();
 		List<Map> resultList = commonQueryDao.commonQuery(requestMap);
@@ -85,7 +89,7 @@ public class CommonQueryService {
 		CommonUtils.saveFile(null, "backup.sql", backupContent);
 		
 		CommonQueryResp resp = new CommonQueryResp();
-		resp.setTotalNum(resultList.size());
+		resp.setTotalNum(commonQueryDao.commonQueryCount(requestMap));
 		resp.setResultList(resultList);
 		resp.setColumns(columns);
 		String resultMessage = JSONObject.fromObject(resp).toString();
@@ -160,81 +164,83 @@ public class CommonQueryService {
 		return resultMessage;
 	}
 	
-	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList,String downloadPath) throws IOException {
+	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList,String downloadPath){
 		
 		HashMap<String,String> requestMap = new HashMap<String, String>();
 		ArrayList<String> columns = new ArrayList<String>();
 		StringBuffer backupSql = new StringBuffer();
 		
-		for(QuerySqlModel q :querySqlList){
-			requestMap.put("sql", q.getScriptContent());
-			List<Map> resultList = commonQueryDao.commonQuery(requestMap);
-			if(resultList!=null&&resultList.size()>0){
-				Map map = resultList.get(0);
-				Iterator it = map.keySet().iterator();
-				while(it.hasNext()){
-					String str = (String) it.next();
-					columns.add(str);
+		try {
+			CommonUtils.delFolder(downloadPath+"sources/");
+			for(QuerySqlModel q :querySqlList){
+				requestMap.put("sql", q.getScriptContent());
+				List<Map> resultList = commonQueryDao.commonQuery(requestMap);
+				if(resultList!=null&&resultList.size()>0){
+					Map map = resultList.get(0);
+					Iterator it = map.keySet().iterator();
+					while(it.hasNext()){
+						String str = (String) it.next();
+						columns.add(str);
+					}
 				}
-			}
-			
-			Map map;
-			int i,j,columnSize=columns.size(),resultSize=resultList.size();
-			String sql = q.getScriptContent().toUpperCase();
-			Pattern patternTableName1 = Pattern.compile("FROM (.*?)WHERE");
-			Pattern patternTableName2 = Pattern.compile("FROM (.*?)$");
-			Matcher matcher =patternTableName1.matcher(sql);
-			if(matcher.find()){
-				backupSql.append("INSERT INTO "+matcher.group(1)+" (");
-			}else{
-				matcher =patternTableName2.matcher(sql);
+				Map map;
+				int i,j,columnSize=columns.size(),resultSize=resultList.size();
+				String sql = q.getScriptContent().toUpperCase();
+				Pattern patternTableName1 = Pattern.compile("FROM (.*?)WHERE");
+				Pattern patternTableName2 = Pattern.compile("FROM (.*?)$");
+				Matcher matcher =patternTableName1.matcher(sql);
 				if(matcher.find()){
 					backupSql.append("INSERT INTO "+matcher.group(1)+" (");
 				}else{
-					backupSql.append("INSERT INTO  NoTable (");
-				}
-			}
-			for(i=0;i<columnSize;i++){
-				backupSql.append(columns.get(i)+",");
-			}
-			backupSql.append(") VALUES (");
-			String columnsSQL = backupSql.toString().replace(",)", ")");
-			backupSql.setLength(0);
-			String columnType = "";
-			for(i=0;i<resultSize;i++){
-				backupSql.append(columnsSQL);
-				map = (Map)resultList.get(i);
-				for(j=0;j<columnSize;j++){
-					Object o = map.get(columns.get(j));
-					if(o!=null){
-						columnType = o.getClass().toString();
-						if("class java.lang.String".equals(columnType)){
-							backupSql.append("'"+(String) map.get(columns.get(j))+"',");
-						}else if("class java.sql.Timestamp".equals(columnType)){
-							backupSql.append("'"+CommonUtils.formatDate((java.sql.Timestamp) map.get(columns.get(j)))+"',");
-						}
+					matcher =patternTableName2.matcher(sql);
+					if(matcher.find()){
+						backupSql.append("INSERT INTO "+matcher.group(1)+" (");
+					}else{
+						backupSql.append("INSERT INTO  NoTable (");
 					}
 				}
-				backupSql.append(");\n");
+				for(i=0;i<columnSize;i++){
+					backupSql.append(columns.get(i)+",");
+				}
+				backupSql.append(") VALUES (");
+				String columnsSQL = backupSql.toString().replace(",)", ")");
+				backupSql.setLength(0);
+				String columnType = "";
+				for(i=0;i<resultSize;i++){
+					backupSql.append(columnsSQL);
+					map = (Map)resultList.get(i);
+					for(j=0;j<columnSize;j++){
+						Object o = map.get(columns.get(j));
+						if(o!=null){
+							columnType = o.getClass().toString();
+							if("class java.lang.String".equals(columnType)){
+								backupSql.append("'"+(String) map.get(columns.get(j))+"',");
+							}else if("class java.sql.Timestamp".equals(columnType)){
+								backupSql.append("'"+CommonUtils.formatDate((java.sql.Timestamp) map.get(columns.get(j)))+"',");
+							}
+						}
+					}
+					backupSql.append(");\n");
+				}
+				
+				String backupContent = backupSql.toString().replace(",)", ")");
+				CommonUtils.saveFile(null, downloadPath+"sources/"+q.getScriptFileName()+".sql", backupContent);
+				CommonQueryResp resp = new CommonQueryResp();
+				resp.setTotalNum(resultSize);
+				resp.setResultList(resultList);
+				resp.setColumns(columns);
+				String resultMessage = JSONObject.fromObject(resp).toString();
+				CommonUtils.saveFile(null, downloadPath+"query.log", resultMessage);
+				
+				backupSql.setLength(0);
+				columns.clear();
 			}
-			
-			String backupContent = backupSql.toString().replace(",)", ")");
-			CommonUtils.saveFile(null, downloadPath+"sources/"+q.getScriptFileName()+".sql", backupContent);
-			CommonQueryResp resp = new CommonQueryResp();
-			resp.setTotalNum(resultSize);
-			resp.setResultList(resultList);
-			resp.setColumns(columns);
-			String resultMessage = JSONObject.fromObject(resp).toString();
-			CommonUtils.saveFile(null, downloadPath+"query.log", resultMessage);
-			
-			backupSql.setLength(0);
-			columns.clear();
+			ZipUtils zipUtils = new ZipUtils(downloadPath+"/sql.zip");
+			zipUtils.compress(downloadPath+"sources/");
+		} catch (Exception e) {
+			return "文件异常，请检查文件格式和内容";
 		}
-		
-		ZipUtils zipUtils = new ZipUtils(downloadPath+"/sql.zip");
-		zipUtils.compress(downloadPath+"sources/");
-		
-		return "执行成功！";
+		return "执行成功";
 	}
 	
 	public String createFLZL(String[] sqls){

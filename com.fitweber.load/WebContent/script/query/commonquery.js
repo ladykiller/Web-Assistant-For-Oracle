@@ -26,13 +26,20 @@ jQuery(document).ready(function(){
 		});
 	},"json");
 	
-	
-	var copy = jQuery('#paramModel').clone(true);
-	copy.attr('style','display:block').attr('id','param_1');
-	copy.children().eq(0).children().eq(0).attr('id','paramName_1');
-	copy.children().eq(1).children().eq(0).attr('id','paramValue_1');
-	copy.children().eq(2).children().eq(0).attr('id','paramLogic_1');
-	jQuery('#paramModel').after(copy);
+	jQuery('#add_param').click(function(){
+		var copy = jQuery('#paramModel').clone(true);
+		copy.attr('style','display:block').attr('id','param_1');
+		copy.children().eq(0).children().eq(0).attr('id','paramName_1');
+		copy.children().eq(1).children().eq(0).attr('id','paramValue_1');
+		copy.children().eq(2).children().eq(0).attr('id','paramLogic_1');
+		jQuery('#paramModel').after(copy);
+		jQuery('input[id*="paramName_"]').autocomplete(columnData, {
+			minChars: 0,
+			max: 1000,
+			scrollHeight: 220
+		});
+		resortParam();
+	});
 	
 	jQuery('#req_rework').click(function(){
 		jQuery('#req_nf_sid').val('');
@@ -45,7 +52,7 @@ jQuery(document).ready(function(){
 		if(pageNum>1){
 			pageNum=pageNum-1;
 			pageSize=15;
-			commonQuery(pageNum,pageSize);
+			commonQueryByParam(pageNum,pageSize);
 		}else{
 			alert('已经是第一页了！');
 		}
@@ -59,7 +66,7 @@ jQuery(document).ready(function(){
 			return;
 		}else{
 			pageSize=15;
-			commonQuery(pageNum,pageSize);
+			commonQueryByParam(pageNum,pageSize);
 		}
 	});
 	
@@ -77,30 +84,69 @@ jQuery(document).ready(function(){
 			return;
 		}else{
 			pageSize=15;
-			commonQuery(pageNum,pageSize);
+			commonQueryByParam(pageNum,pageSize);
 		}
 	});
 	
 	jQuery('#req_search').click(function(){
+		if(jQuery('#tableName').val()!==''){
+			jQuery('input[id*="paramName_"]').each(function(i){
+				if(jQuery(this).val()===''){
+					alert('第'+(i+1)+'行请填入参数名！');
+					this.focus();
+					return;
+				}
+			});
+			jQuery('input[id*="paramValue_"]').each(function(i){
+				if(jQuery(this).val()===''){
+					alert('第'+(i+1)+'行请填入参数值！');
+					this.focus();
+					return;
+				}
+			});
+		}else{
+			alert('请填入表名！');
+			return;
+		}
 		pageNum=1;
 		pageSize=15;
 		commonQuery(pageNum,pageSize);
 	});
 	
 	jQuery('#param_search').click(function(){
-		pageNum=1;
-		pageSize=15;
-		commonQueryByParam(pageNum,pageSize);
+		var submitflag = true;
+		if(jQuery('#tableName').val()!==''){
+			jQuery('input[id*="paramName_"]').each(function(i){
+				if(jQuery(this).val()===''){
+					alert('第'+(i+1)+'行请填入参数名！');
+					this.focus();
+					submitflag=false;
+				}
+			});
+			if(submitflag){
+				jQuery('input[id*="paramValue_"]').each(function(i){
+					if(jQuery(this).val()===''){
+						alert('第'+(i+1)+'行请填入参数值！');
+						this.focus();
+						submitflag=false;
+					}
+				});
+			}
+		}else{
+			alert('请填入表名！');
+			submitflag=false;
+		}
+		if(submitflag){
+			pageNum=1;
+			pageSize=15;
+			commonQueryByParam(pageNum,pageSize);
+		}
 	});
 
 	jQuery('#sql_search').click(function(){
 		pageNum=1;
 		pageSize=15;
 		commonQueryBySQL(pageNum,pageSize);
-	});
-	
-	jQuery('#execel_search').click(function(){
-		jQuery('#uploadExecel').submit();
 	});
 	
 	jQuery('#tableName').blur(function(){
@@ -161,6 +207,9 @@ function commonQueryByParam(pageNum,pageSize){
 			content=content+'<tr id="result_'+i+'">';
 			for(j=0;j<columnSize;j++){
 				columnVal=jQuery(temp).attr(columns[j]);
+				if(columnVal===undefined){
+					columnVal='';
+				}
 				if(columnVal.time!==undefined){
 					dateVal = new Date(columnVal.time);
 					columnVal = dateVal.getFullYear()+'-'+(dateVal.getMonth()+1)+'-'+dateVal.getDate();

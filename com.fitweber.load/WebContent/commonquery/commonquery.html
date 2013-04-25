@@ -67,7 +67,7 @@ height:80px;
 				<tr>
 					<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;表名称:&nbsp;<input id='tableName' name='tableName' type="text"/></td>
 					<td><p>
-			    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='req_rework' name='param_rework'><span>重置</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='param_search' name='param_search'><span>查询</span></a></p></td>
+			    	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='req_rework' name='param_rework'><span>重置</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='param_search' name='param_search'><span>查询</span></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='add_param' name='add_param'><span>增加参数</span></a></p></td>
 				</tr>
 			</table>
 		</td>
@@ -108,23 +108,9 @@ height:80px;
 	</tr>
 </table>
 <p>&nbsp;</p>
-
-
+</form>
+<iframe name="execelFrame" width="80%" frameborder="0" src="execelframe/execelframe.html"></iframe>
 <p>&nbsp;</p>
-</form>
-<form id="uploadExecel" name="uploadExecel" action="/extend/commonQuery/commonQueryByExcel.do" method="post" enctype="multipart/form-data">
-	<table>
-		<tr>
-			<td colspan="4"  class="search">
-				<table>
-					<tr>
-						<td class="search">Execel配置文件:&nbsp;&nbsp;&nbsp;&nbsp;<input id="execel_param" name="execel_param" type="file" size="50" /></td><td>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#none" id='execel_search' name='execel_search'><span>查询</span></a></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
-</form>
 </div>
 <div >
 <form method="post" id="workdailyForm" name="workdailyForm">
