@@ -54,7 +54,7 @@ public class CommonUtils {
 	 * @throws IOException
 	 */
 	public static void saveFile(String savePalce, String fileName,
-			String context) throws IOException {
+			String context,boolean append) throws IOException {
 		if (savePalce != null) {
 			File dir = new File(savePalce);
 			if (!dir.exists()) {
@@ -76,9 +76,9 @@ public class CommonUtils {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
-			FileOutputStream out = new FileOutputStream(file, false);
+			FileOutputStream out = new FileOutputStream(file, append);
 			if (context != null) {
-				out.write(context.getBytes("utf-8"));
+				out.write(context.getBytes());
 			}
 			out.close();
 		}
@@ -243,7 +243,7 @@ public class CommonUtils {
 				}
 			}
 			saveFile(null, "C:\\Users\\Administrator\\Desktop\\updateSvn.bat",
-					bf.toString());
+					bf.toString(),false);
 			System.out.println(bf.toString());
 			book.close();
 		} catch (Exception e) {
@@ -288,7 +288,7 @@ public class CommonUtils {
 				}
 			}
 			saveFile(null, "C:\\Users\\Administrator\\Desktop\\insertsql.sql",
-					bf.toString());
+					bf.toString(),false);
 			System.out.println(bf.toString());
 			book.close();
 		} catch (Exception e) {

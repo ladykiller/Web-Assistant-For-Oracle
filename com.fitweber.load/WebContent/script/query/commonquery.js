@@ -214,12 +214,13 @@ function commonQueryByParam(pageNum,pageSize){
 					dateVal = new Date(columnVal.time);
 					columnVal = dateVal.getFullYear()+'-'+(dateVal.getMonth()+1)+'-'+dateVal.getDate();
 				}
-				content=content+'<td>'+columnVal+'</td>';
+				content=content+'<td class="result">'+columnVal+'</td>';
 			}
 			content=content+'</tr>';
 		}
 		jQuery('tr[id*="result_"]').remove();
-		jQuery(content).insertAfter(jQuery('#tableHead'))
+		jQuery(content).insertAfter(jQuery('#tableHead'));
+		jQuery('#page_buttom').css('display','block');
 	},"json"); 
 }
 
@@ -251,14 +252,23 @@ function commonQueryBySQL(pageNum,pageSize){
 		var i,j,columnVal,dateVal,resultSize=resultList.length,columnSize=columns.length;
 		for(i=0;i<resultSize;i++){
 			temp = resultList[i];
-			content=content+'<tr>';
+			content=content+'<tr id="result_'+i+'">';
 			for(j=0;j<columnSize;j++){
-				content=content+'<td>'+jQuery(temp).attr(columns[j])+'</td>';
+				columnVal=jQuery(temp).attr(columns[j]);
+				if(columnVal===undefined){
+					columnVal='';
+				}
+				if(columnVal.time!==undefined){
+					dateVal = new Date(columnVal.time);
+					columnVal = dateVal.getFullYear()+'-'+(dateVal.getMonth()+1)+'-'+dateVal.getDate();
+				}
+				content=content+'<td class="result">'+columnVal+'</td>';
 			}
 			content=content+'</tr>';
 		}
 		jQuery('tr[id*="result_"]').remove();
-		jQuery(content).insertAfter(jQuery('#tableHead'))
+		jQuery(content).insertAfter(jQuery('#tableHead'));
+		jQuery('#page_buttom').css('display','none');
 	},"json"); 
 }
 

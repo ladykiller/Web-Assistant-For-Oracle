@@ -16,10 +16,6 @@
 	</select>
 	<!-- 先换过来，还没实现查询和数据打包之间切换。打包程序要用全量查询 -->
 	<select id="commonQueryByPage" resultType="java.util.HashMap" parameterType="java.util.HashMap">
-		${sql}
-	</select>
-	
-	<select id="commonQuery" resultType="java.util.HashMap" parameterType="java.util.HashMap">
 		<![CDATA[
 			SELECT * FROM (SELECT ROWNUM AS RN,T.* FROM (${sql}) T)
 		]]>
@@ -28,6 +24,10 @@
 			<if test="BEIGNROW!=null"> AND RN >  #{BEIGNROW, jdbcType=NUMERIC}</if>
 			<if test="ENDROW!=null"> AND RN &lt; = #{ENDROW, jdbcType=NUMERIC}</if>
 		</trim>
+	</select>
+	
+	<select id="commonQuery" resultType="java.util.HashMap" parameterType="java.util.HashMap">
+		${sql}
 	</select>
 	
 	<select id="commonQueryCount" resultType="int" parameterType="java.util.HashMap">

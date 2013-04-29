@@ -16,11 +16,18 @@ table.in{
 	border-collapse: collapse;
 	background-color: #D3E2EE;
 }
-td{
-text-align:center;
+td.result{
+	text-align:left;
+	font-size:20px;
+	white-space:nowrap;
+	height:21px;
 }
 td.search{
 	text-align:left;
+}
+
+td.buttom{
+	text-align:center;
 }
 textarea {
 width:99%;
@@ -128,8 +135,8 @@ height:80px;
       </table>
       </td>
     </tr>
-    <tr>
-    	<td colspan="2" align="center"><p>
+    <tr id="page_buttom">
+    	<td colspan="2" class="buttom"><p>
     	<a href="#none" id='prePage' name='prePage'><span>上一页</span></a>&nbsp;&nbsp;共<input id='totalNum' type="text" readonly="readonly" style="width:20px;" />页,当前第<input id='pageNum' type="text" readonly="readonly" style="width:20px;"/>页&nbsp;&nbsp;<a href="#none" id='nextPage' name='nextPage'><span>下一页</span></a>&nbsp;&nbsp;&nbsp;&nbsp;跳转到<input id='jumpPageNum' name='jumpPageNum' type="text" style="width:20px;"/>页&nbsp;&nbsp;<a href="#none" id='jumpPage' name='jumpPage'><span>跳转</span></a></p></td>
     </tr>
   </table>

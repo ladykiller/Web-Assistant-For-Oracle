@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
@@ -74,7 +75,7 @@ public class CommonQueryController implements ServletConfigAware {
 	
 	@RequestMapping("/commonQueryByParam.do")
 	public void commonQueryByParam(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException, IOException, SQLException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml; charset=UTF-8");
 		String requestData = request.getParameter("json").toString();
@@ -89,7 +90,7 @@ public class CommonQueryController implements ServletConfigAware {
 	
 	@RequestMapping("/commonQueryBySQL.do")
 	public void commonQueryBySQL(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+			HttpServletResponse response) throws ServletException, IOException, SQLException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/xml; charset=UTF-8");
 		String requestData = request.getParameter("json").toString();
