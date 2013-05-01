@@ -40,7 +40,6 @@ public class CommonQueryService {
 		JSONObject jsonObject =JSONObject.fromObject(requestData);
 		CommonQueryReq commonQueryReq = (CommonQueryReq) JSONObject.toBean(jsonObject,CommonQueryReq.class,classMap);
 		
-		
 		StringBuffer sql = new StringBuffer();
 		sql.append("SELECT * FROM ");
 		sql.append(commonQueryReq.getTableName());
@@ -104,9 +103,15 @@ public class CommonQueryService {
 		resp.setTotalNum(commonQueryDao.commonQueryCount(requestMap));
 		resp.setResultList(resultList);
 		resp.setColumns(columns);
-		String resultMessage = JSONObject.fromObject(resp).toString();
-		CommonUtils.saveFile(null, "query.log", resultMessage,false);
-		return resultMessage;
+		try {
+			String resultMessage = JSONObject.fromObject(resp).toString();
+			CommonUtils.saveFile(null, "query.log", resultMessage,false);
+			return resultMessage;
+			
+		} catch (Exception e) {
+			return "{\"error\":\"查询表中含有BLOB或CLOB字段！程序无法解析。可用Execel配置查询。\"}";
+			// TODO: handle exception
+		}
 	}
 
 	/**
@@ -256,18 +261,26 @@ public class CommonQueryService {
 		Map map;
 		Object o;
 		int i,j;
-		Pattern patternTableName1 = Pattern.compile("FROM (.*?)WHERE");
+		String tableName=null,condition=null,deleteSQL=null;
+		Pattern patternTableName1 = Pattern.compile("FROM (.*?)WHERE(.*?)$");
 		Pattern patternTableName2 = Pattern.compile("FROM (.*?)$");
 		Matcher matcher =patternTableName1.matcher(sql);
 		if(matcher.find()){
-			backupSql.append("INSERT INTO "+matcher.group(1)+" (");
+			tableName=matcher.group(1);
+			condition=matcher.group(2);
+			backupSql.append("INSERT INTO "+tableName+" (");
 		}else{
 			matcher =patternTableName2.matcher(sql);
 			if(matcher.find()){
-				backupSql.append("INSERT INTO "+matcher.group(1)+" (");
+				tableName=matcher.group(1);
+				condition=" 1=1";
+				backupSql.append("INSERT INTO "+tableName+" (");
 			}else{
 				backupSql.append("INSERT INTO  NoTable (");
 			}
+		}
+		if(tableName!=null){
+			deleteSQL="DELETE FROM "+tableName+" WHERE "+condition+";\n";
 		}
 		for(i=0;i<columnSize;i++){
 			backupSql.append(columns.get(i)+",");
@@ -275,6 +288,9 @@ public class CommonQueryService {
 		backupSql.append(") VALUES (");
 		String columnsSQL = backupSql.toString().replace(",)", ")");
 		backupSql.setLength(0);
+		if(deleteSQL!=null){
+			backupSql.append(deleteSQL);
+		}
 		for(i=0;i<resultSize;i++){
 			backupSql.append(columnsSQL);
 			map = (Map)resultList.get(i);
