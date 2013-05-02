@@ -110,7 +110,6 @@ public class CommonQueryService {
 			
 		} catch (Exception e) {
 			return "{\"error\":\"查询表中含有BLOB或CLOB字段！程序无法解析。可用Execel配置查询。\"}";
-			// TODO: handle exception
 		}
 	}
 
@@ -127,14 +126,22 @@ public class CommonQueryService {
 		JSONObject jsonObject =JSONObject.fromObject(requestData);
 		CommonSQL commonSQL = (CommonSQL) JSONObject.toBean(jsonObject,CommonSQL.class);
 		requestMap.put("sql", commonSQL.getSql());
+		requestMap.put("BEIGNROW",String.valueOf(( commonSQL.getPageNum()-1)*commonSQL.getPageSize()));
+		requestMap.put("ENDROW",String.valueOf(commonSQL.getPageNum()*commonSQL.getPageSize()));
+		
+		int totalNum=commonQueryDao.commonQueryCount(requestMap);
+		
 		ArrayList<String> columns = new ArrayList<String>();
-		List<Map> resultList = commonQueryDao.commonQuery(requestMap);
+		List<Map> resultList = commonQueryDao.commonQueryByPage(requestMap);
 		if(resultList!=null&&resultList.size()>0){
 			Map map = resultList.get(0);
 			Iterator it = map.keySet().iterator();
+			columns.add("RN");
 			while(it.hasNext()){
 				String str = (String) it.next();
-				columns.add(str);
+				if(!"RN".equals(str)){
+					columns.add(str);
+				}
 			}
 		}
 		
@@ -161,21 +168,13 @@ public class CommonQueryService {
 		backupSql.append(") VALUES (");
 		String columnsSQL = backupSql.toString().replace(",)", ")");
 		backupSql.setLength(0);
-		String columnType = "";
 		for(i=0;i<resultSize;i++){
 			backupSql.append(columnsSQL);
 			map = (Map)resultList.get(i);
 			for(j=0;j<columnSize;j++){
 				Object o = map.get(columns.get(j));
 				if(o!=null){
-					columnType = o.getClass().toString();
-					if("class java.lang.String".equals(columnType)){
-						backupSql.append("'"+(String) o+"',");
-					}else if("class java.sql.Timestamp".equals(columnType)){
-						backupSql.append("'"+CommonUtils.formatDate((java.sql.Timestamp) o)+"',");
-					}else if("class oracle.sql.CLOB".equals(columnType)){
-						backupSql.append("'"+((oracle.sql.CLOB)o).getSubString(1, (int)((oracle.sql.CLOB)o).length())+"',");
-					}
+					backupSql.append(getValueString(o)+",");
 				}
 			}
 			backupSql.append(");\n");
@@ -183,12 +182,17 @@ public class CommonQueryService {
 		String backupContent = backupSql.toString().replace(",)", ")");
 		CommonUtils.saveFile(null, "backup.sql", backupContent,false);
 		CommonQueryResp resp = new CommonQueryResp();
-		resp.setTotalNum(resultSize);
+		resp.setTotalNum(totalNum);
 		resp.setResultList(resultList);
 		resp.setColumns(columns);
-		String resultMessage = JSONObject.fromObject(resp).toString();
-		CommonUtils.saveFile(null, "query.log", resultMessage,false);
-		return resultMessage;
+		try {
+			String resultMessage = JSONObject.fromObject(resp).toString();
+			CommonUtils.saveFile(null, "query.log", resultMessage,false);
+			return resultMessage;
+			
+		} catch (Exception e) {
+			return "{\"error\":\"查询表中含有BLOB或CLOB字段！程序无法解析。可用Execel配置查询。\"}";
+		}
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })

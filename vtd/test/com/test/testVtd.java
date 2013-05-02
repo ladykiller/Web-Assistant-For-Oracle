@@ -12,6 +12,7 @@ import com.ximpleware.XMLModifier;
 
 public class testVtd {
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Test
 	public void testOverWrite() throws Exception{
 		VTDGen vg = new VTDGen();

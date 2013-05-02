@@ -1,4 +1,5 @@
 var pageNum=1,pageSize=15;
+var queryFlag = 'byparam';//标识当前使用的何种查询。选值:'byparam','bysql','byexecel'(保留使用).
 var columnData = [];
 jQuery(document).ready(function(){
 
@@ -52,7 +53,11 @@ jQuery(document).ready(function(){
 		if(pageNum>1){
 			pageNum=pageNum-1;
 			pageSize=15;
-			commonQueryByParam(pageNum,pageSize);
+			if(queryFlag==='byparam'){
+				commonQueryByParam(pageNum,pageSize);
+			}else if(queryFlag==='bysql'){
+				commonQueryBySQL(pageNum,pageSize);
+			}
 		}else{
 			alert('已经是第一页了！');
 		}
@@ -66,7 +71,11 @@ jQuery(document).ready(function(){
 			return;
 		}else{
 			pageSize=15;
-			commonQueryByParam(pageNum,pageSize);
+			if(queryFlag==='byparam'){
+				commonQueryByParam(pageNum,pageSize);
+			}else if(queryFlag==='bysql'){
+				commonQueryBySQL(pageNum,pageSize);
+			}
 		}
 	});
 	
@@ -228,6 +237,7 @@ function commonQueryByParam(pageNum,pageSize){
 			jQuery('#tableHead').append('<th>'+datas.error+'</th>');
 			jQuery('#page_buttom').css('display','none');
 		}
+		queryFlag='byparam';
 	},"json"); 
 }
 
@@ -239,43 +249,51 @@ function commonQueryBySQL(pageNum,pageSize){
 	
 	var jsondata = JSON.stringify(queryData);
 	jQuery.post("/extend/commonQuery/commonQueryBySQL.do",{json:jsondata},function(datas){
-		jQuery('#pageNum').val(pageNum);
-		var totalNum = datas.totalNum;
-		if(totalNum%pageSize===0){
-			jQuery('#totalNum').val(parseInt(totalNum/pageSize));
-		}else{
-			jQuery('#totalNum').val(parseInt(totalNum/pageSize)+1);
-		}
-		//构建一张表，返回数据中包含的列名用作表头
-		var columns = datas.columns;
-		var resultList = datas.resultList;
-		var content='',temp;
-		jQuery(columns).each(function(){
-			content=content+'<th>'+this+'</th>';
-		});
-		jQuery('#tableHead').children().remove();
-		jQuery('#tableHead').append(content);
-		content='';
-		var i,j,columnVal,dateVal,resultSize=resultList.length,columnSize=columns.length;
-		for(i=0;i<resultSize;i++){
-			temp = resultList[i];
-			content=content+'<tr id="result_'+i+'">';
-			for(j=0;j<columnSize;j++){
-				columnVal=jQuery(temp).attr(columns[j]);
-				if(columnVal===undefined){
-					columnVal='';
-				}
-				if(columnVal.time!==undefined){
-					dateVal = new Date(columnVal.time);
-					columnVal = dateVal.getFullYear()+'-'+(dateVal.getMonth()+1)+'-'+dateVal.getDate();
-				}
-				content=content+'<td class="result">'+columnVal+'</td>';
+		if(datas.error===null||datas.error===undefined){
+			jQuery('#pageNum').val(pageNum);
+			var totalNum = datas.totalNum;
+			if(totalNum%pageSize===0){
+				jQuery('#totalNum').val(parseInt(totalNum/pageSize));
+			}else{
+				jQuery('#totalNum').val(parseInt(totalNum/pageSize)+1);
 			}
-			content=content+'</tr>';
+			//构建一张表，返回数据中包含的列名用作表头
+			var columns = datas.columns;
+			var resultList = datas.resultList;
+			var content='',temp;
+			jQuery(columns).each(function(){
+				content=content+'<th>'+this+'</th>';
+			});
+			jQuery('#tableHead').children().remove();
+			jQuery('#tableHead').append(content);
+			content='';
+			var i,j,columnVal,dateVal,resultSize=resultList.length,columnSize=columns.length;
+			for(i=0;i<resultSize;i++){
+				temp = resultList[i];
+				content=content+'<tr id="result_'+i+'">';
+				for(j=0;j<columnSize;j++){
+					columnVal=jQuery(temp).attr(columns[j]);
+					if(columnVal===undefined){
+						columnVal='';
+					}
+					if(columnVal.time!==undefined){
+						dateVal = new Date(columnVal.time);
+						columnVal = dateVal.getFullYear()+'-'+(dateVal.getMonth()+1)+'-'+dateVal.getDate();
+					}
+					content=content+'<td class="result">'+columnVal+'</td>';
+				}
+				content=content+'</tr>';
+			}
+			jQuery('tr[id*="result_"]').remove();
+			jQuery(content).insertAfter(jQuery('#tableHead'));
+			jQuery('#page_buttom').css('display','block');
+		}else{
+			jQuery('#tableHead').children().remove();
+			jQuery('tr[id*="result_"]').remove();
+			jQuery('#tableHead').append('<th>'+datas.error+'</th>');
+			jQuery('#page_buttom').css('display','none');
 		}
-		jQuery('tr[id*="result_"]').remove();
-		jQuery(content).insertAfter(jQuery('#tableHead'));
-		jQuery('#page_buttom').css('display','none');
+		queryFlag='bysql';
 	},"json"); 
 }
 
