@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" import="java.util.Date"  contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
@@ -10,6 +10,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>生成历史</title>
 	<style type="text/css">
 	<!--
 		table{
@@ -36,10 +37,11 @@
 	</style>
 	<script type="text/javascript" language="javascript" src="<%=basePath %>script/jquery/20121128/jquery.js" ></script>
 	<script type="text/javascript">
-		var webContext = "${pageContext.request.contextPath}";
+		//var webContext = "${pageContext.request.contextPath}";
+		var webContext = "<%=basePath %>";
 		jQuery(document).ready(function(){
 			jQuery.ajax({
-				url : webContext + "/commonQuery/createDownloadList.do",
+				url : webContext + "/commonQuery/createDownloadList.do?createtime="+"<%=new Date().getTime()%>",
 				data : {},
 				dataType : "json",
 				headers : {
@@ -48,7 +50,7 @@
 				success : function(datas, textStatus, jqXHR) {
  						var content='',temp;						
 					jQuery(datas).each(function(i){
-						content=content+'<tr><td>'+(i+1)+'</td><td><a href="#" onclick="downloadfile(this);" id="'+this.filename+'">'+this.filename+'</a></td><td><a href="#">下载</a></td></tr>';
+						content=content+'<tr><td>'+(i+1)+'</td><td><a href="#" onclick="downloadfile(this);" id="'+this.filename+'">'+this.filename+'</a></td><td><a href="#" onclick="filedownload(this);" downloadid="'+this.filename+'">下载</a></td></tr>';
 					});
 					jQuery(content).insertAfter(jQuery('#tableHead'));
 				},
@@ -65,13 +67,17 @@
 			jQuery('#downloadfilename').val(obj.id);
 			jQuery('#downloadform').submit();
 		}
+		function filedownload(obj){
+			jQuery('#downloadfilename').val(jQuery(obj).attr('downloadid'));
+			jQuery('#downloadform').submit();
+		}
 	</script>
 </head>
 <body>
 	<form id="downloadform"  action="/extend/commonQuery/createDownloadProccess.do" method="post">
 		<input type="hidden" value="" id="downloadfilename" name="downloadfilename" />
 	</form>
-	<table border="">
+	<table align="center">
 		<tr id='tableHead'><th width="50">序号</th><th width="950">脚本</th><th width="200">操作</th></tr>
 	</table>
 </body>

@@ -32,9 +32,17 @@ import com.fitweber.util.FileOperateUtil;
 
 /**
  * 
- * @author 海杰
- * 
+ * <pre>
+ * 通用查询Controller。
+ * </pre>
+ * @author wheatmark  hajima11@163.com
+ * @version 1.00.00
+ * <pre>
+ * 修改记录
+ *    修改后版本:     修改人：  修改日期:     修改内容: 
+ * </pre>
  */
+
 @Controller
 @RequestMapping("/commonQuery")
 public class CommonQueryController implements ServletConfigAware {
@@ -119,7 +127,7 @@ public class CommonQueryController implements ServletConfigAware {
 			String[] params = elementList.get(i).split("\t");
 			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
 		}
-		String resultMessage = commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,"附列资料");
+		String resultMessage = commonQueryService.commonQueryByExcel(request,response,querySqlList,sqldownloadPath,"附列资料");
 		PrintWriter out = response.getWriter();
 		out.write(resultMessage);
 		out.close();
@@ -170,7 +178,7 @@ public class CommonQueryController implements ServletConfigAware {
     			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
     		}
     		String timeStamp = CommonUtils.formatTime(new Date()).replace(":", "").replace("-", "").replace(" ", "");
-    		String message = commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,originalFileName.substring(0,originalFileName.lastIndexOf('.'))+"_"+timeStamp);
+    		String message = commonQueryService.commonQueryByExcel(request,response,querySqlList,sqldownloadPath,originalFileName.substring(0,originalFileName.lastIndexOf('.'))+"_"+timeStamp);
     		if(!"执行成功".equals(message)){
     			PrintWriter out = response.getWriter();
     			out.write("<html>"+message+"</html>");
@@ -181,49 +189,9 @@ public class CommonQueryController implements ServletConfigAware {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "downloadList";
+        return "execelframe";
 	}
 
-	@RequestMapping("/createXMLByExecel.do")
-	public void createXMLByExecel(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
-		response.setContentType("text/xml; charset=UTF-8");
-		String queryexecelPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/queryexecel/").replace("\\", "/");
-		String sqldownloadPath = (request.getSession().getServletContext().getRealPath("")+"/commonquery/sqldownload/").replace("\\", "/");
-        MultipartHttpServletRequest multipartHttpservletRequest=(MultipartHttpServletRequest) request;
-        MultipartFile multipartFile = multipartHttpservletRequest.getFile("execel_param");
-        String originalFileName=multipartFile.getOriginalFilename();
-        File file=new File(queryexecelPath);
-        if(!file.exists()){
-            file.mkdir();
-        }
-        try {
-        	String queryFilePath  = file+"/queryexecel"+originalFileName.substring(originalFileName.lastIndexOf('.'),originalFileName.length());
-            FileOutputStream fileOutputStream=new FileOutputStream(queryFilePath);
-            fileOutputStream.write(multipartFile.getBytes());
-            fileOutputStream.flush();
-            fileOutputStream.close();
-            
-    		ArrayList<String> elementList = CommonUtils.readExecel(queryFilePath);
-    		ArrayList<QuerySqlModel> querySqlList = new ArrayList<QuerySqlModel>();
-    		int sqlSize = elementList.size(),i;
-    		for(i=1;i<sqlSize;i++){//屏蔽表头
-    			String[] params = elementList.get(i).split("\t");
-    			querySqlList.add(new QuerySqlModel(params[0], params[1].replace(";", ""), params[2]));
-    		}
-    		PrintWriter out = response.getWriter();
-    		out.write("<html>"+commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,"325")+"</html>");
-    		out.write("<html>"+commonQueryService.commonQueryByExcel(querySqlList,sqldownloadPath,"325")+"</html>");
-    		out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        //return "success";
-	}
-	
 	@RequestMapping("/createDownloadList.do")
 	public void createDownloadList(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -243,13 +211,23 @@ public class CommonQueryController implements ServletConfigAware {
 //		}
 		if (file.exists()&&file.isDirectory()) {
 		    String[] tempList = file.list();
+		    
 		    StringBuffer buf = new StringBuffer();
 		    int i,listSize = tempList.length;
+		    //数组倒序
+		    int halfpoint = listSize/2;
+		    String temp;
+		    for(i=0;i<halfpoint;i++){
+		    	temp=tempList[i];
+		    	tempList[i]=tempList[listSize-1-i];
+		    	tempList[listSize-1-i]=temp;
+		    }
 		    buf.append("[");
-		    for(i=1;i<listSize-1;i++){
+		    int loopsize = listSize-2;
+		    for(i=0;i<loopsize;i++){
 		    	buf.append("{\"filename\":\""+tempList[i]+"\"},");
 			}
-		    buf.append("{\"filename\":\""+tempList[listSize-1]+"\"}]");
+		    buf.append("{\"filename\":\""+tempList[loopsize]+"\"}]");
 		    PrintWriter out = response.getWriter();
 		    out.write(buf.toString());
 		    out.close();

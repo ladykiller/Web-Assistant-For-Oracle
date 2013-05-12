@@ -10,17 +10,33 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import net.sf.json.JSONObject;
 
 import com.fitweber.dao.CommonQueryDao;
 import com.fitweber.pojo.QuerySqlModel;
 import com.fitweber.util.CommonUtils;
+import com.fitweber.util.FileOperateUtil;
 import com.fitweber.util.ZipUtils;
 import com.fitweber.vo.CommonParam;
 import com.fitweber.vo.CommonQueryReq;
 import com.fitweber.vo.CommonQueryResp;
 import com.fitweber.vo.CommonSQL;
 
+/**
+ * 
+ * <pre>
+ * 通用查询Service。
+ * </pre>
+ * @author wheatmark  hajima11@163.com
+ * @version 1.00.00
+ * <pre>
+ * 修改记录
+ *    修改后版本:     修改人：  修改日期:     修改内容: 
+ * </pre>
+ */
 public class CommonQueryService {
 	
 	private CommonQueryDao commonQueryDao;
@@ -196,7 +212,8 @@ public class CommonQueryService {
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public String commonQueryByExcel(ArrayList<QuerySqlModel> querySqlList,String downloadPath,String originalFileName){
+	public String commonQueryByExcel(HttpServletRequest request,
+			HttpServletResponse response,ArrayList<QuerySqlModel> querySqlList,String downloadPath,String originalFileName){
 		
 		HashMap<String,String> requestMap = new HashMap<String, String>();
 		ArrayList<String> columns = new ArrayList<String>();
@@ -251,6 +268,8 @@ public class CommonQueryService {
 			}
 			ZipUtils zipUtils = new ZipUtils(downloadPath+"/"+originalFileName+".zip");
 			zipUtils.compress(downloadPath+"sources/");
+	        FileOperateUtil.download(request, response, originalFileName+".zip", "application/x-msdownload;",  
+	        		originalFileName+".zip","commonquery\\sqldownload\\");  
 		} catch (Exception e) {
 			e.printStackTrace();
 			return "文件异常，请检查文件格式和内容";

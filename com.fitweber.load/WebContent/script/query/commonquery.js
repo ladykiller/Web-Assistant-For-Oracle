@@ -155,7 +155,12 @@ jQuery(document).ready(function(){
 	jQuery('#sql_search').click(function(){
 		pageNum=1;
 		pageSize=15;
-		commonQueryBySQL(pageNum,pageSize);
+		if(jQuery('#sql_statment').val()!==''){
+			commonQueryBySQL(pageNum,pageSize);
+		}else{
+			alert('请填写查询语句！');
+			document.getElementById('sql_statment').focus();
+		}
 	});
 	
 	jQuery('#tableName').blur(function(){
